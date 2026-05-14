@@ -10,7 +10,7 @@ const products = [
     discount: 10,
     rating: 4.5,
     reviews: 222,
-    image: '/images/category-1.png' // Using category image as placeholder
+    image: '/assets/thumb-1.png' // Using category image as placeholder
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ const products = [
     discount: 10,
     rating: 4.5,
     reviews: 41,
-    image: '/images/category-1.png'
+    image: '/assets/thumb-2.png'
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const products = [
     discount: 10,
     rating: 4.0,
     reviews: 32,
-    image: '/images/category-1.png'
+    image: '/assets/thumb-3.png'
   },
   {
     id: 4,
@@ -40,7 +40,7 @@ const products = [
     discount: 10,
     rating: 4.5,
     reviews: 222,
-    image: '/images/category-1.png'
+    image: '/assets/thumb-4.png'
   },
   {
     id: 5,
@@ -50,7 +50,7 @@ const products = [
     discount: 15,
     rating: 5.0,
     reviews: 89,
-    image: '/images/category-1.png'
+    image: '/assets/thumb-5.png'
   }
 ];
 

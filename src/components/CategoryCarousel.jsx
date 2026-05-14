@@ -6,14 +6,14 @@ import 'swiper/css/navigation';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const categories = [
-  { id: 1, name: 'Fruits & Veges', image: '/images/category-1.png' },
-  { id: 2, name: 'Breads & Sweets', image: '/images/category-1.png' }, // Using same image for demo
-  { id: 3, name: 'Beverages', image: '/images/category-1.png' },
-  { id: 4, name: 'Meat Products', image: '/images/category-1.png' },
-  { id: 5, name: 'Dairy & Eggs', image: '/images/category-1.png' },
-  { id: 6, name: 'Frozen Foods', image: '/images/category-1.png' },
-  { id: 7, name: 'Snacks', image: '/images/category-1.png' },
-  { id: 8, name: 'Household', image: '/images/category-1.png' },
+  { id: 1, name: 'Fruits & Veges', image: '/assets/categoty-thumb-1.png' },
+  { id: 2, name: 'Breads & Sweets', image: '/assets/category-thumb-2.png' }, // Using same image for demo
+  { id: 3, name: 'Beverages', image: '/assets/category-thumb-3.png' },
+  { id: 4, name: 'Meat Products', image: '/assets/category-thumb-4.png' },
+  { id: 5, name: 'Dairy & Eggs', image: '/assets/category-thumb-5.png' },
+  { id: 6, name: 'Frozen Foods', image: '/assets/category-thumb-6.png' },
+  { id: 7, name: 'Snacks', image: '/assets/category-thumb-7.png' },
+  { id: 8, name: 'Household', image: '/assets/category-thumb-8.png' },
 ];
 
 const CategoryCarousel = () => {
@@ -55,9 +55,9 @@ const CategoryCarousel = () => {
             <SwiperSlide key={category.id}>
               <div className="group cursor-pointer">
                 <div className="relative aspect-square rounded-full overflow-hidden mb-4 border-4 border-transparent group-hover:border-primary/20 transition-all duration-300">
-                  <img 
-                    src={category.image} 
-                    alt={category.name} 
+                  <img
+                    src={category.image}
+                    alt={category.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-primary/10 transition-colors" />

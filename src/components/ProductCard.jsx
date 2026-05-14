@@ -5,9 +5,9 @@ const ProductCard = ({ product }) => {
   return (
     <div className="bg-white rounded-3xl p-5 border border-gray-100 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 transition-all group">
       <div className="relative aspect-square mb-6 bg-gray-50 rounded-2xl overflow-hidden">
-        <img 
-          src={product.image} 
-          alt={product.name} 
+        <img
+          src={product.image}
+          alt={product.name}
           className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500"
         />
         {product.discount && (
@@ -23,10 +23,10 @@ const ProductCard = ({ product }) => {
       <div className="space-y-3">
         <div className="flex items-center gap-1">
           {[...Array(5)].map((_, i) => (
-            <Star 
-              key={i} 
-              size={14} 
-              className={i < Math.floor(product.rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-200"} 
+            <Star
+              key={i}
+              size={14}
+              className={i < Math.floor(product.rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-200"}
             />
           ))}
           <span className="text-[10px] font-bold text-gray-400 ml-1">({product.reviews})</span>
