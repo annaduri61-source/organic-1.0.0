@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+/* ─── Font System ─────────────────────────────────────────── */
+@layer base {
+  :root {
+    --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+    --font-display: "Playfair Display", Georgia, serif;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Display headings → Playfair Display */
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  /* Sub-headings stay in the sans stack */
+  h4, h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  /* Body copy */
+  p, li, td, th, label, input, textarea, select, button {
+    font-family: var(--font-sans);
+  }
+}
+
+/* ─── Utility classes for inline use ─────────────────────── */
+@layer utilities {
+  .font-display   { font-family: var(--font-display); }
+  .font-sans-body { font-family: var(--font-sans); }
+  .tracking-display { letter-spacing: -0.03em; }
+}
