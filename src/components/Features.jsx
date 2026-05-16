@@ -32,7 +32,7 @@ const Features = () => {
         <FeatureItem 
           icon={Truck} 
           title="Free delivery" 
-          description="Complimentary shipping on all orders over $50."
+          description="Complimentary shipping on all orders over ₹500."
           colorClass="bg-accent"
         />
       </div>

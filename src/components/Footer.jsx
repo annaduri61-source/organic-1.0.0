@@ -1,6 +1,7 @@
 import React from 'react';
 import { Send } from 'lucide-react';
 import { Facebook, Twitter, Instagram, Youtube } from './SocialIcons';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -32,7 +33,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
           {/* Brand Info */}
           <div className="space-y-6">
-            <img src="/images/logo.png" alt="Organic" className="h-10 brightness-0 invert" />
+            <Link to="/">
+              <img src="/images/logo.png" alt="Organic" className="h-10 brightness-0 invert" />
+            </Link>
             <p className="text-gray-400 leading-relaxed">
               We are dedicated to providing the highest quality organic produce to our community. Fresh from the farm, delivered with love.
             </p>
@@ -48,10 +51,10 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-bold mb-8">Quick Links</h4>
             <ul className="space-y-4 text-gray-400">
-              <li><a href="#" className="hover:text-primary transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Our Services</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Contact Us</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Privacy Policy</a></li>
+              <li><Link to="/" className="hover:text-primary transition-colors">Home</Link></li>
+              <li><Link to="/about" className="hover:text-primary transition-colors">About Us</Link></li>
+              <li><Link to="/shop" className="hover:text-primary transition-colors">Shop</Link></li>
+              <li><Link to="/contact" className="hover:text-primary transition-colors">Contact Us</Link></li>
             </ul>
           </div>
 
@@ -59,10 +62,10 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-bold mb-8">Categories</h4>
             <ul className="space-y-4 text-gray-400">
-              <li><a href="#" className="hover:text-primary transition-colors">Fruits & Vegetables</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Dairy & Eggs</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Bakery & Bread</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Meat & Poultry</a></li>
+              <li><Link to="/shop" className="hover:text-primary transition-colors">Fruits & Vegetables</Link></li>
+              <li><Link to="/shop" className="hover:text-primary transition-colors">Dairy & Eggs</Link></li>
+              <li><Link to="/shop" className="hover:text-primary transition-colors">Bakery & Bread</Link></li>
+              <li><Link to="/shop" className="hover:text-primary transition-colors">Meat & Poultry</Link></li>
             </ul>
           </div>
 

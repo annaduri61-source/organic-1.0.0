@@ -6,21 +6,21 @@ import 'swiper/css/navigation';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const categories = [
-  { id: 1, name: 'Fruits & Veges', image: '/assets/categoty-thumb-1.png' },
-  { id: 2, name: 'Breads & Sweets', image: '/assets/category-thumb-2.png' }, // Using same image for demo
-  { id: 3, name: 'Beverages', image: '/assets/category-thumb-3.png' },
-  { id: 4, name: 'Meat Products', image: '/assets/category-thumb-4.png' },
-  { id: 5, name: 'Dairy & Eggs', image: '/assets/category-thumb-5.png' },
-  { id: 6, name: 'Frozen Foods', image: '/assets/category-thumb-6.png' },
-  { id: 7, name: 'Snacks', image: '/assets/category-thumb-7.png' },
-  { id: 8, name: 'Household', image: '/assets/category-thumb-8.png' },
+  { id: 1, name: 'Fruits & Veges', image: '/assets/category-thumb-1.jpg' },
+  { id: 2, name: 'Breads & Sweets', image: '/assets/category-thumb-2.jpg' },
+  { id: 3, name: 'Beverages', image: '/assets/category-thumb-3.jpg' },
+  { id: 4, name: 'Meat Products', image: '/assets/category-thumb-5.jpg' },
+  { id: 5, name: 'Dairy & Eggs', image: '/assets/category-thumb-7.jpg' },
+  { id: 6, name: 'Frozen Foods', image: '/assets/category-thumb-6.jpg' },
+  { id: 7, name: 'Snacks', image: '/assets/category-thumb-8.jpg' },
+  { id: 8, name: 'Household', image: '/assets/category-thumb-4.jpg' },
 ];
 
 const CategoryCarousel = () => {
   return (
-    <section className="py-20 overflow-hidden">
+    <section className="py-12 overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between mb-12">
+        <div className="flex items-center justify-between mb-8">
           <h2 className="text-3xl font-bold text-gray-900">Browse by Category</h2>
           <div className="flex items-center gap-4">
             <a href="#" className="text-sm font-bold text-primary hover:underline px-4 py-2 bg-primary/5 rounded-full">View All</a>

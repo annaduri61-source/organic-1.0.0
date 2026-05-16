@@ -10,7 +10,7 @@ const products = [
     discount: 10,
     rating: 4.5,
     reviews: 222,
-    image: '/assets/thumb-1.png' // Using category image as placeholder
+    image: '/assets/product-thumb-1.png' // Using category image as placeholder
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ const products = [
     discount: 10,
     rating: 4.5,
     reviews: 41,
-    image: '/assets/thumb-2.png'
+    image: '/assets/product-thumb-2.png'
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const products = [
     discount: 10,
     rating: 4.0,
     reviews: 32,
-    image: '/assets/thumb-3.png'
+    image: '/assets/product-thumb-3.png'
   },
   {
     id: 4,
@@ -40,25 +40,15 @@ const products = [
     discount: 10,
     rating: 4.5,
     reviews: 222,
-    image: '/assets/thumb-4.png'
-  },
-  {
-    id: 5,
-    name: 'Fresh Salmon Fillet',
-    price: 32.00,
-    oldPrice: 38.00,
-    discount: 15,
-    rating: 5.0,
-    reviews: 89,
-    image: '/assets/thumb-5.png'
+    image: '/assets/product-thumb-4.png'
   }
 ];
 
 const ProductGrid = () => {
   return (
-    <section className="py-20 bg-gray-50/50">
+    <section className="py-12 bg-gray-50/50">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between mb-12">
+        <div className="flex items-center justify-between mb-8">
           <div>
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Best Selling Products</h2>
             <p className="text-gray-500">The most popular items from our local organic farms.</p>
@@ -68,7 +58,7 @@ const ProductGrid = () => {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}

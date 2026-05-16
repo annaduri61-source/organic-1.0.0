@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Star, ShoppingCart, Heart, Plus, Minus } from 'lucide-react';
 
 const ProductCard = ({ product }) => {
   return (
-    <div className="bg-white rounded-3xl p-5 border border-gray-100 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 transition-all group">
-      <div className="relative aspect-square mb-6 bg-gray-50 rounded-2xl overflow-hidden">
+    <div className="bg-white rounded-3xl p-5 border border-gray-100 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 transition-all group cursor-pointer">
+      <Link to="/product" className="relative aspect-square mb-6 bg-gray-50 rounded-2xl overflow-hidden block">
         <img
           src={product.image}
           alt={product.name}
@@ -18,7 +19,7 @@ const ProductCard = ({ product }) => {
         <button className="absolute top-4 right-4 p-2 bg-white/80 backdrop-blur-md rounded-full text-gray-400 hover:text-accent opacity-0 group-hover:opacity-100 transition-all">
           <Heart size={18} />
         </button>
-      </div>
+      </Link>
 
       <div className="space-y-3">
         <div className="flex items-center gap-1">
@@ -32,15 +33,17 @@ const ProductCard = ({ product }) => {
           <span className="text-[10px] font-bold text-gray-400 ml-1">({product.reviews})</span>
         </div>
 
-        <h3 className="font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-1">
-          {product.name}
-        </h3>
+        <Link to="/product">
+          <h3 className="font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-1">
+            {product.name}
+          </h3>
+        </Link>
 
         <div className="flex items-center justify-between">
           <div className="flex items-baseline gap-2">
-            <span className="text-xl font-black text-gray-900">${product.price.toFixed(2)}</span>
+            <span className="text-xl font-black text-gray-900">₹{product.price.toFixed(2)}</span>
             {product.oldPrice && (
-              <del className="text-sm text-gray-400 font-bold">${product.oldPrice.toFixed(2)}</del>
+              <del className="text-sm text-gray-400 font-bold">₹{product.oldPrice.toFixed(2)}</del>
             )}
           </div>
         </div>
@@ -51,7 +54,7 @@ const ProductCard = ({ product }) => {
             <span className="text-xs font-bold w-4 text-center">1</span>
             <button className="text-gray-400 hover:text-primary"><Plus size={14} /></button>
           </div>
-          <button className="flex-grow flex items-center justify-center gap-2 bg-primary text-white py-2.5 rounded-xl font-bold text-xs hover:bg-primary/90 transition-all active:scale-95 shadow-lg shadow-primary/20">
+          <button className="flex-grow flex items-center justify-center gap-2 bg-yellow-400 text-gray-900 py-2.5 rounded-xl font-bold text-xs hover:bg-yellow-500 hover:scale-[1.05] hover:shadow-xl hover:shadow-yellow-400/40 transition-all active:scale-95 shadow-lg shadow-yellow-400/20">
             <ShoppingCart size={14} /> Add to Cart
           </button>
         </div>
