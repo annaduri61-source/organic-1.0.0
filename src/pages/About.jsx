@@ -26,7 +26,7 @@ const About = () => {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
           {[
             { label: 'Years Experience', value: '14+' },
             { label: 'Happy Customers', value: '50k+' },
@@ -41,22 +41,40 @@ const About = () => {
         </div>
 
         {/* Story Section */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-32">
-          <div className="relative rounded-[40px] overflow-hidden aspect-[4/3] shadow-2xl">
-            <img 
-              src="/assets/sample-image.jpg" 
-              alt="Our Story" 
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-primary/10" />
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-stretch mb-20">
+          <div className="flex flex-col gap-6 lg:gap-8 h-full">
+            <div className="relative rounded-[32px] overflow-hidden flex-1 shadow-xl group min-h-[250px] lg:min-h-0">
+              <img 
+                src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1000" 
+                alt="Our Farm" 
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-primary/10 pointer-events-none transition-colors duration-500 group-hover:bg-transparent" />
+            </div>
+            <div className="relative rounded-[32px] overflow-hidden flex-1 shadow-xl group min-h-[250px] lg:min-h-0">
+              <img 
+                src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=1000" 
+                alt="Organic Produce" 
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-primary/10 pointer-events-none transition-colors duration-500 group-hover:bg-transparent" />
+            </div>
           </div>
           <div className="space-y-8">
             <h2 className="text-3xl lg:text-5xl font-black text-gray-900 leading-tight">
               Our Journey Started In A <span className="text-primary italic">Small Local Farm</span>
             </h2>
-            <p className="text-gray-600 leading-relaxed">
-              We started with just three local farmers who wanted to change how people access organic food. Today, we work with over 100 sustainable farms across the region to ensure you get the best quality every single day.
-            </p>
+            <div className="space-y-4">
+              <p className="text-gray-600 leading-relaxed">
+                We started with just three local farmers who wanted to change how people access organic food. Today, we work with over 100 sustainable farms across the region to ensure you get the best quality every single day.
+              </p>
+              <p className="text-gray-600 leading-relaxed">
+                Our commitment goes beyond simply providing fresh produce. We believe in nurturing the earth, supporting local agricultural communities, and promoting a holistic, sustainable lifestyle. Every item you find in our store has been carefully curated, ensuring it meets our strict standards for organic integrity, so you and your family can enjoy nature's true, unadulterated flavors.
+              </p>
+              <p className="text-gray-600 leading-relaxed">
+                From our fields to your kitchen, we ensure complete transparency in our supply chain. We use zero artificial fertilizers or pesticides, relying solely on natural composting and crop rotation. When you choose us, you're not just buying food; you're investing in your health and the future of our planet.
+              </p>
+            </div>
             <div className="grid sm:grid-cols-2 gap-6">
               {[
                 { icon: Leaf, title: 'Natural Process', desc: 'No chemicals used' },

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Star, ShoppingBag, Heart, Share2, ShieldCheck, Truck, RefreshCw, Plus, Minus, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 
 const SingleProduct = () => {
+  const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('description');
 
@@ -107,7 +109,10 @@ const SingleProduct = () => {
                   <Plus size={20} />
                 </button>
               </div>
-              <button className="flex-grow bg-yellow-400 text-gray-900 font-black py-5 rounded-[24px] shadow-2xl shadow-yellow-400/20 hover:bg-yellow-500 hover:scale-[1.05] hover:shadow-yellow-400/40 active:scale-[0.98] transition-all flex items-center justify-center gap-4 text-lg">
+              <button 
+                onClick={() => navigate('/cart')}
+                className="flex-grow bg-yellow-400 text-gray-900 font-black py-5 rounded-[24px] shadow-2xl shadow-yellow-400/20 hover:bg-yellow-500 hover:scale-[1.05] hover:shadow-yellow-400/40 active:scale-[0.98] transition-all flex items-center justify-center gap-4 text-lg"
+              >
                 <ShoppingBag size={24} /> Add to Cart
               </button>
             </div>

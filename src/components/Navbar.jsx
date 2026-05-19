@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Search, User, Heart, ShoppingBag, Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
+import { useWishlist } from '../context/WishlistContext';
 
 const Navbar = () => {
+  const { likedItems } = useWishlist();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -53,12 +55,12 @@ const Navbar = () => {
             </button>
             <button className="p-2.5 hover:bg-gray-100 rounded-full transition-all text-gray-700 relative">
               <Heart size={22} />
-              <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-primary text-white text-[10px] flex items-center justify-center rounded-full">0</span>
+              <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-pink-500 text-white text-[10px] flex items-center justify-center rounded-full">{likedItems.length}</span>
             </button>
-            <button className="p-2.5 bg-primary/10 hover:bg-primary/20 rounded-full transition-all text-primary relative">
+            <Link to="/cart" className="p-2.5 bg-primary/10 hover:bg-primary/20 rounded-full transition-all text-primary relative">
               <ShoppingBag size={22} />
               <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-primary text-white text-[10px] flex items-center justify-center rounded-full font-bold shadow-sm">3</span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -144,6 +146,7 @@ const Navbar = () => {
                     <li><Link to="/about" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold hover:text-primary block">About Us</Link></li>
                     <li><Link to="/shop" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold hover:text-primary block">Shop</Link></li>
                     <li><Link to="/product" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold hover:text-primary block">Single Product</Link></li>
+                    <li><Link to="/cart" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold hover:text-primary block">Cart</Link></li>
                     <li><Link to="/contact" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold hover:text-primary block">Contact</Link></li>
                   </ul>
                 </div>
