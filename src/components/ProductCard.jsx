@@ -1,8 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Star, ShoppingCart, Heart, Plus, Minus } from 'lucide-react';
+import { useWishlist } from '../context/WishlistContext';
 
 const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
+  const { toggleWishlist, isLiked } = useWishlist();
+  const liked = isLiked(product.id);
+
+  const handleLikeClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleWishlist(product);
+  };
+
   return (
     <div className="bg-white rounded-3xl p-5 border border-gray-100 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 transition-all group cursor-pointer">
       <Link to="/product" className="relative aspect-square mb-6 bg-gray-50 rounded-2xl overflow-hidden block">
@@ -16,8 +27,11 @@ const ProductCard = ({ product }) => {
             {product.discount}% OFF
           </span>
         )}
-        <button className="absolute top-4 right-4 p-2 bg-white/80 backdrop-blur-md rounded-full text-gray-400 hover:text-accent opacity-0 group-hover:opacity-100 transition-all">
-          <Heart size={18} />
+        <button 
+          onClick={handleLikeClick}
+          className={`absolute top-4 right-4 p-2 backdrop-blur-md rounded-full transition-all z-10 ${liked ? 'bg-pink-100 text-pink-500 opacity-100' : 'bg-white/80 text-gray-400 hover:text-pink-500 opacity-0 group-hover:opacity-100'}`}
+        >
+          <Heart size={18} className={liked ? 'fill-pink-500' : ''} />
         </button>
       </Link>
 
@@ -54,7 +68,10 @@ const ProductCard = ({ product }) => {
             <span className="text-xs font-bold w-4 text-center">1</span>
             <button className="text-gray-400 hover:text-primary"><Plus size={14} /></button>
           </div>
-          <button className="flex-grow flex items-center justify-center gap-2 bg-yellow-400 text-gray-900 py-2.5 rounded-xl font-bold text-xs hover:bg-yellow-500 hover:scale-[1.05] hover:shadow-xl hover:shadow-yellow-400/40 transition-all active:scale-95 shadow-lg shadow-yellow-400/20">
+          <button 
+            onClick={() => navigate('/cart')}
+            className="flex-grow flex items-center justify-center gap-2 bg-yellow-400 text-gray-900 py-2.5 rounded-xl font-bold text-xs hover:bg-yellow-500 hover:scale-[1.05] hover:shadow-xl hover:shadow-yellow-400/40 transition-all active:scale-95 shadow-lg shadow-yellow-400/20"
+          >
             <ShoppingCart size={14} /> Add to Cart
           </button>
         </div>
