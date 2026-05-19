@@ -1,41 +1,260 @@
 @import "tailwindcss";
 
-/* ─── Font System ─────────────────────────────────────────── */
+/* ──────────────────────────────────────────────────────────
+   BASE
+────────────────────────────────────────────────────────── */
 @layer base {
+
   :root {
     --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
-    --font-display: "Playfair Display", Georgia, serif;
+    --font-display: "Playfair Display", serif;
+
+    --bg: #f6fbff;
+
+    --text-primary: #163047;
+    --text-secondary: #6b7f92;
+
+    --blue: #4da8ff;
+    --mint: #8de0d1;
+
+    --card-bg: rgba(255,255,255,0.72);
+  }
+
+  * {
+    box-sizing: border-box;
   }
 
   html {
+    scroll-behavior: smooth;
     font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
   }
 
-  /* Display headings → Playfair Display */
-  h1, h2, h3 {
+  body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    color: var(--text-primary);
+
+    background-color: var(--bg);
+
+    /* subtle grid texture */
+    background-image:
+      linear-gradient(
+        rgba(77,168,255,0.04) 1px,
+        transparent 1px
+      ),
+
+      linear-gradient(
+        90deg,
+        rgba(77,168,255,0.04) 1px,
+        transparent 1px
+      );
+
+    background-size: 50px 50px;
+
+    position: relative;
+  }
+
+  /* Floating blur circles */
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: -1;
+    opacity: 0.35;
+  }
+
+  body::before {
+    width: 350px;
+    height: 350px;
+
+    top: -120px;
+    left: -100px;
+
+    background: #8de0d1;
+  }
+
+  body::after {
+    width: 300px;
+    height: 300px;
+
+    bottom: -100px;
+    right: -80px;
+
+    background: #93c5fd;
+  }
+
+  h1,
+  h2,
+  h3 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    margin: 0;
+    letter-spacing: -0.03em;
   }
 
-  /* Sub-headings stay in the sans stack */
-  h4, h5, h6 {
-    font-family: var(--font-sans);
-    font-weight: 700;
-    letter-spacing: -0.01em;
+  p {
+    color: var(--text-secondary);
+    line-height: 1.7;
   }
 
-  /* Body copy */
-  p, li, td, th, label, input, textarea, select, button {
-    font-family: var(--font-sans);
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
   }
 }
 
-/* ─── Utility classes for inline use ─────────────────────── */
+/* ──────────────────────────────────────────────────────────
+   UTILITIES
+────────────────────────────────────────────────────────── */
 @layer utilities {
-  .font-display   { font-family: var(--font-display); }
-  .font-sans-body { font-family: var(--font-sans); }
-  .tracking-display { letter-spacing: -0.03em; }
+
+  /* App wrapper */
+  .app-shell {
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Navbar */
+  .navbar-surface {
+    background: rgba(255,255,255,0.72);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border-bottom:
+      1px solid rgba(77,168,255,0.08);
+
+    box-shadow:
+      0 4px 24px rgba(0,0,0,0.04);
+  }
+
+  /* Glass cards */
+  .surface-glass {
+    background: var(--card-bg);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border:
+      1px solid rgba(255,255,255,0.45);
+
+    border-radius: 24px;
+
+    box-shadow:
+      0 10px 30px rgba(0,0,0,0.05);
+  }
+
+  /* Hover effect */
+  .hover-lift {
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+      0 18px 35px rgba(0,0,0,0.08);
+  }
+
+  /* Premium Button */
+  .btn-modern {
+    background: #163047;
+    color: white;
+
+    padding: 14px 28px;
+
+    border-radius: 999px;
+
+    font-weight: 600;
+
+    transition: all 0.3s ease;
+  }
+
+  .btn-modern:hover {
+    transform: translateY(-2px);
+
+    background: #1f4565;
+
+    box-shadow:
+      0 10px 25px rgba(22,48,71,0.15);
+  }
+
+  /* Secondary button */
+  .btn-soft {
+    background: white;
+
+    border:
+      1px solid rgba(77,168,255,0.15);
+
+    color: #163047;
+
+    padding: 14px 28px;
+
+    border-radius: 999px;
+
+    font-weight: 600;
+  }
+
+  /* Input */
+  .input-modern {
+    width: 100%;
+
+    background: rgba(255,255,255,0.8);
+
+    border:
+      1px solid rgba(77,168,255,0.12);
+
+    padding: 14px 16px;
+
+    border-radius: 14px;
+
+    outline: none;
+
+    transition: 0.3s ease;
+  }
+
+  .input-modern:focus {
+    border-color: #4da8ff;
+
+    box-shadow:
+      0 0 0 4px rgba(77,168,255,0.08);
+  }
+
+  /* Section spacing */
+  .section-padding {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  /* Tiny badge */
+  .badge-soft {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    background: white;
+
+    padding: 8px 16px;
+
+    border-radius: 999px;
+
+    border:
+      1px solid rgba(77,168,255,0.12);
+
+    font-size: 14px;
+
+    font-weight: 600;
+  }
 }

@@ -1,50 +1,9 @@
 import React from 'react';
 import ProductCard from './ProductCard';
-
-const products = [
-  {
-    id: 1,
-    name: 'Whole Wheat Sandwich Bread',
-    price: 18.00,
-    oldPrice: 24.00,
-    discount: 10,
-    rating: 4.5,
-    reviews: 222,
-    image: '/assets/product-thumb-1.png' // Using category image as placeholder
-  },
-  {
-    id: 2,
-    name: 'Whole Grain Oatmeal',
-    price: 50.00,
-    oldPrice: 54.00,
-    discount: 10,
-    rating: 4.5,
-    reviews: 41,
-    image: '/assets/product-thumb-2.png'
-  },
-  {
-    id: 3,
-    name: 'Sharp Cheddar Cheese',
-    price: 12.00,
-    oldPrice: 14.00,
-    discount: 10,
-    rating: 4.0,
-    reviews: 32,
-    image: '/assets/product-thumb-3.png'
-  },
-  {
-    id: 4,
-    name: 'Organic Baby Spinach',
-    price: 18.00,
-    oldPrice: 24.00,
-    discount: 10,
-    rating: 4.5,
-    reviews: 222,
-    image: '/assets/product-thumb-4.png'
-  }
-];
+import { products } from '../data/products';
 
 const ProductGrid = () => {
+  const displayedProducts = products.slice(0, 4);
   return (
     <section className="py-12 bg-gray-50/50">
       <div className="container mx-auto px-4">
@@ -59,7 +18,7 @@ const ProductGrid = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {products.map(product => (
+          {displayedProducts.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

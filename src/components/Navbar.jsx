@@ -1,167 +1,382 @@
 import React, { useState } from 'react';
-import { Search, User, Heart, ShoppingBag, Menu, X, ChevronDown } from 'lucide-react';
+
+import {
+  Search,
+  User,
+  Heart,
+  ShoppingBag,
+  Menu,
+  X,
+  ArrowRight,
+} from 'lucide-react';
+
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useLocation } from 'react-router-dom';
+
+import {
+  Link,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
+
 import { useWishlist } from '../context/WishlistContext';
 
+import { useCart } from '../context/CartContext';
+
 const Navbar = () => {
+
   const { likedItems } = useWishlist();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { cartItems, getCartCount } =
+    useCart();
+
+  const [isMenuOpen, setIsMenuOpen] =
+    useState(false);
+
   const location = useLocation();
 
-  const isActive = (path) => location.pathname === path;
+  const navigate = useNavigate();
+
+  const isActive = (path) =>
+    location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
-      {/* Top Search & Actions */}
-      <div className="container mx-auto px-4 py-2">
-        <div className="flex items-center justify-between gap-4 lg:gap-8">
-          {/* Logo & Mobile Menu Toggle */}
-          <div className="flex items-center gap-4">
-            <button
-              className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              onClick={() => setIsMenuOpen(true)}
-            >
-              <Menu size={24} />
-            </button>
-            <Link to="/" className="flex-shrink-0">
-              <img src="/assets/logo.png" alt="Organic" className="h-8 lg:h-10 w-auto" />
-            </Link>
-          </div>
+    <>
+      {/* NAVBAR */}
+      <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
 
-          {/* Desktop Search Bar */}
-          <div className="hidden md:flex flex-grow max-w-2xl bg-gray-50 rounded-2xl border border-gray-100 px-4 py-1.5 items-center gap-2">
-            <select className="bg-transparent border-none text-sm font-semibold text-gray-600 focus:ring-0 cursor-pointer pr-8">
-              <option>All Categories</option>
-              <option>Groceries</option>
-              <option>Drinks</option>
-              <option>Chocolates</option>
-            </select>
-            <div className="w-px h-6 bg-gray-200 mx-2" />
-            <div className="flex-grow flex items-center gap-2">
-              <Search size={18} className="text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search for more than 20,000 products"
-                className="w-full bg-transparent border-none focus:ring-0 text-sm py-1.5"
-              />
-            </div>
-          </div>
+        {/* TOP */}
+        <div className="container mx-auto px-4 py-3">
 
-          {/* Action Icons */}
-          <div className="flex items-center gap-2 lg:gap-6">
-            <button className="p-2.5 hover:bg-gray-100 rounded-full transition-all text-gray-700">
-              <User size={22} />
-            </button>
-            <button className="p-2.5 hover:bg-gray-100 rounded-full transition-all text-gray-700 relative">
-              <Heart size={22} />
-              <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-pink-500 text-white text-[10px] flex items-center justify-center rounded-full">{likedItems.length}</span>
-            </button>
-            <Link to="/cart" className="p-2.5 bg-primary/10 hover:bg-primary/20 rounded-full transition-all text-primary relative">
-              <ShoppingBag size={22} />
-              <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-primary text-white text-[10px] flex items-center justify-center rounded-full font-bold shadow-sm">3</span>
-            </Link>
-          </div>
-        </div>
-      </div>
+          <div className="flex items-center justify-between gap-4 lg:gap-8">
 
-      {/* Main Navigation (Desktop) */}
-      <nav className="hidden lg:block border-t border-gray-50">
-        <div className="container mx-auto px-4">
-          <ul className="flex items-center justify-center gap-10 py-2 text-sm font-bold uppercase tracking-wider text-gray-700">
-            <li>
+            {/* LEFT */}
+            <div className="flex items-center gap-4">
+
+              {/* MOBILE MENU */}
+              <button
+                className="lg:hidden p-2 hover:bg-gray-100 rounded-xl transition-all"
+                onClick={() =>
+                  setIsMenuOpen(true)
+                }
+              >
+
+                <Menu size={24} />
+
+              </button>
+
+              {/* LOGO */}
               <Link
                 to="/"
-                className={`transition-colors pb-2 -mb-2 border-b-2 ${isActive('/') ? 'text-primary border-primary' : 'text-gray-700 border-transparent hover:text-primary'}`}
+                className="flex items-center gap-3"
               >
-                Home
+
+                <img
+                  src="/assets/logo.png"
+                  alt="Organic"
+                  className="h-10 w-auto"
+                />
+
+                
               </Link>
-            </li>
-            <li>
+            </div>
+
+            {/* SEARCH */}
+            <div className="hidden md:flex flex-grow max-w-2xl bg-gray-50 rounded-2xl border border-gray-100 px-4 py-2 items-center gap-3 shadow-sm">
+
+              <select className="bg-transparent border-none text-sm font-semibold text-gray-600 focus:ring-0 cursor-pointer pr-5">
+
+                <option>
+                  All Categories
+                </option>
+
+                <option>
+                  Vegetables
+                </option>
+
+                <option>
+                  Fruits
+                </option>
+
+                <option>
+                  Drinks
+                </option>
+
+                <option>
+                  Snacks
+                </option>
+              </select>
+
+              <div className="w-px h-6 bg-gray-200"></div>
+
+              <div className="flex-grow flex items-center gap-2">
+
+                <Search
+                  size={18}
+                  className="text-gray-400"
+                />
+
+                <input
+                  type="text"
+                  placeholder="Search organic products..."
+                  className="w-full bg-transparent border-none focus:ring-0 text-sm py-1 outline-none"
+                />
+              </div>
+            </div>
+
+            {/* RIGHT */}
+            <div className="flex items-center gap-2 lg:gap-4">
+
+              {/* LOGIN */}
               <Link
-                to="/about"
-                className={`transition-colors pb-2 -mb-2 border-b-2 ${isActive('/about') ? 'text-primary border-primary' : 'text-gray-700 border-transparent hover:text-primary'}`}
+                to="/login"
+                className="p-3 hover:bg-gray-100 rounded-full transition-all text-gray-700"
               >
-                About Us
+
+                <User size={22} />
+
               </Link>
-            </li>
-            <li>
+
+              {/* WISHLIST */}
               <Link
-                to="/shop"
-                className={`transition-colors pb-2 -mb-2 border-b-2 ${isActive('/shop') ? 'text-primary border-primary' : 'text-gray-700 border-transparent hover:text-primary'}`}
+                to="/wishlist"
+                className="p-3 hover:bg-pink-50 rounded-full transition-all text-gray-700 relative"
               >
-                Shop
+
+                <Heart size={22} />
+
+                <span className="absolute top-1 right-1 w-5 h-5 bg-pink-500 text-white text-[10px] flex items-center justify-center rounded-full font-bold">
+                  {likedItems.length}
+                </span>
               </Link>
-            </li>
-            <li>
+
+              {/* CART */}
               <Link
-                to="/product"
-                className={`transition-colors pb-2 -mb-2 border-b-2 ${isActive('/product') ? 'text-primary border-primary' : 'text-gray-700 border-transparent hover:text-primary'}`}
+                to="/cart"
+                className="p-3 bg-green-100 hover:bg-green-200 rounded-full transition-all text-green-700 relative"
               >
-                Single Product
+
+                <ShoppingBag size={22} />
+
+                <span className="absolute top-1 right-1 w-5 h-5 bg-green-600 text-white text-[10px] flex items-center justify-center rounded-full font-bold">
+                  {getCartCount()}
+                </span>
               </Link>
-            </li>
-            <li>
-              <Link
-                to="/contact"
-                className={`transition-colors pb-2 -mb-2 border-b-2 ${isActive('/contact') ? 'text-primary border-primary' : 'text-gray-700 border-transparent hover:text-primary'}`}
-              >
-                Contact
-              </Link>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
-      </nav>
 
-      {/* Mobile Sidebar Navigation */}
+        {/* DESKTOP NAV */}
+        <nav className="hidden lg:block border-t border-gray-100 bg-white">
+
+          <div className="container mx-auto px-4">
+
+            <ul className="flex items-center justify-center gap-10 py-4 text-sm font-bold uppercase tracking-wider">
+
+              <li>
+                <Link
+                  to="/"
+                  className={`transition-all duration-300 pb-2 border-b-2 ${
+                    isActive('/')
+                      ? 'text-green-600 border-green-600'
+                      : 'text-gray-700 border-transparent hover:text-green-600'
+                  }`}
+                >
+                  Home
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  to="/about"
+                  className={`transition-all duration-300 pb-2 border-b-2 ${
+                    isActive('/about')
+                      ? 'text-green-600 border-green-600'
+                      : 'text-gray-700 border-transparent hover:text-green-600'
+                  }`}
+                >
+                  About
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  to="/shop"
+                  className={`transition-all duration-300 pb-2 border-b-2 ${
+                    isActive('/shop')
+                      ? 'text-green-600 border-green-600'
+                      : 'text-gray-700 border-transparent hover:text-green-600'
+                  }`}
+                >
+                  Shop
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  to="/contact"
+                  className={`transition-all duration-300 pb-2 border-b-2 ${
+                    isActive('/contact')
+                      ? 'text-green-600 border-green-600'
+                      : 'text-gray-700 border-transparent hover:text-green-600'
+                  }`}
+                >
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        {/* MOBILE MENU */}
+        <AnimatePresence>
+
+          {isMenuOpen && (
+            <>
+              {/* OVERLAY */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() =>
+                  setIsMenuOpen(false)
+                }
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999]"
+              />
+
+              {/* SIDEBAR */}
+              <motion.div
+                initial={{ x: '-100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '-100%' }}
+                transition={{
+                  type: 'spring',
+                  damping: 25,
+                }}
+                className="fixed top-0 left-0 bottom-0 w-[85%] max-w-[320px] bg-white z-[99999] shadow-[0_20px_60px_rgba(0,0,0,0.25)] p-6 flex flex-col border-r border-gray-200"
+              >
+
+                {/* TOP */}
+                <div className="flex items-center justify-between mb-10">
+
+                  <img
+                    src="/assets/logo.png"
+                    alt="Logo"
+                    className="h-10"
+                  />
+
+                  <button
+                    onClick={() =>
+                      setIsMenuOpen(false)
+                    }
+                    className="p-2 hover:bg-gray-100 rounded-xl"
+                  >
+
+                    <X size={24} />
+
+                  </button>
+                </div>
+
+                {/* LINKS */}
+                <ul className="space-y-5">
+
+                  <li>
+                    <Link
+                      to="/"
+                      onClick={() =>
+                        setIsMenuOpen(false)
+                      }
+                      className="text-lg font-bold hover:text-green-600 block"
+                    >
+                      Home
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link
+                      to="/about"
+                      onClick={() =>
+                        setIsMenuOpen(false)
+                      }
+                      className="text-lg font-bold hover:text-green-600 block"
+                    >
+                      About
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link
+                      to="/shop"
+                      onClick={() =>
+                        setIsMenuOpen(false)
+                      }
+                      className="text-lg font-bold hover:text-green-600 block"
+                    >
+                      Shop
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link
+                      to="/contact"
+                      onClick={() =>
+                        setIsMenuOpen(false)
+                      }
+                      className="text-lg font-bold hover:text-green-600 block"
+                    >
+                      Contact
+                    </Link>
+                  </li>
+                </ul>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+      </header>
+
+      {/* FLOATING CART BUTTON */}
       <AnimatePresence>
-        {isMenuOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsMenuOpen(false)}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60]"
-            />
-            <motion.div
-              initial={{ x: '-100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '-100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 left-0 bottom-0 w-80 bg-white z-[70] shadow-2xl p-6 flex flex-col"
-            >
-              <div className="flex items-center justify-between mb-8">
-                <img src="/images/logo.png" alt="Logo" className="h-8" />
-                <button onClick={() => setIsMenuOpen(false)} className="p-2 hover:bg-gray-100 rounded-lg">
-                  <X size={24} />
-                </button>
-              </div>
 
-              <div className="flex-grow overflow-y-auto space-y-6">
-                <div>
-                  <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Menu</h4>
-                  <ul className="space-y-4">
-                    <li><Link to="/" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold hover:text-primary block">Home</Link></li>
-                    <li><Link to="/about" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold hover:text-primary block">About Us</Link></li>
-                    <li><Link to="/shop" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold hover:text-primary block">Shop</Link></li>
-                    <li><Link to="/product" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold hover:text-primary block">Single Product</Link></li>
-                    <li><Link to="/cart" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold hover:text-primary block">Cart</Link></li>
-                    <li><Link to="/contact" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold hover:text-primary block">Contact</Link></li>
-                  </ul>
-                </div>
+        {cartItems.length > 0 && (
+          <motion.button
+            initial={{
+              opacity: 0,
+              y: 100,
+              scale: 0.8,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              y: 100,
+              scale: 0.8,
+            }}
+            transition={{
+              type: 'spring',
+              damping: 18,
+            }}
+            onClick={() =>
+              navigate('/cart')
+            }
+            className="fixed bottom-6 right-6 z-[99999] bg-gradient-to-r from-green-500 to-lime-500 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 font-black hover:scale-105 transition-all"
+          >
 
-                <div className="pt-6 border-t border-gray-100">
-                  <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Contact</h4>
-                  <p className="text-sm text-gray-500">Need help? Call us:</p>
-                  <p className="text-lg font-bold text-gray-800">+1 234 567 890</p>
-                </div>
-              </div>
-            </motion.div>
-          </>
+            <ShoppingBag size={22} />
+
+            Continue To Cart
+
+            <span className="bg-white text-green-600 px-2 py-1 rounded-lg text-xs">
+              {getCartCount()}
+            </span>
+
+            <ArrowRight size={18} />
+
+          </motion.button>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 };
 
