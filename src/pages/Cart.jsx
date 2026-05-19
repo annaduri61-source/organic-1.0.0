@@ -2,28 +2,15 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Trash2, Plus, Minus, ArrowRight, ShoppingBag } from 'lucide-react';
-
-const mockCartItems = [
-  {
-    id: 1,
-    name: 'Fresh Organic Strawberry',
-    price: 49.99,
-    quantity: 2,
-    image: '/assets/products/strawberry.png',
-  },
-  {
-    id: 2,
-    name: 'Green Leaf Lettuce',
-    price: 12.99,
-    quantity: 1,
-    image: '/assets/products/lettuce.png',
-  }
-];
+import { useCart } from '../context/CartContext';
 
 const Cart = () => {
-  const subtotal = mockCartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+  const { cartItems, removeFromCart, updateQuantity } = useCart();
+
+  const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
   const tax = subtotal * 0.05;
-  const total = subtotal + tax + 5.00; // 5.00 shipping
+  const shipping = cartItems.length ? 5.0 : 0;
+  const total = subtotal + tax + shipping;
 
   return (
     <div className="bg-gray-50/50 min-h-screen py-12">
@@ -42,7 +29,7 @@ const Cart = () => {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Cart Items List */}
           <div className="lg:col-span-2 space-y-4">
-            {mockCartItems.map((item, index) => (
+            {cartItems.length ? cartItems.map((item, index) => (
               <motion.div
                 key={item.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -65,21 +52,42 @@ const Cart = () => {
                   {/* Quantity & Actions */}
                   <div className="flex flex-col items-center sm:items-end gap-3">
                     <div className="flex items-center bg-gray-50 rounded-xl p-1 border border-gray-100">
-                      <button className="p-2 text-gray-400 hover:text-primary hover:bg-white rounded-lg transition-all shadow-sm">
+                      <button
+                        onClick={() => {
+                          const newQty = item.quantity - 1;
+                          if (newQty < 1) {
+                            removeFromCart(item.id);
+                          } else {
+                            updateQuantity(item.id, newQty);
+                          }
+                        }}
+                        className="p-2 text-gray-400 hover:text-primary hover:bg-white rounded-lg transition-all shadow-sm"
+                      >
                         <Minus size={16} />
                       </button>
                       <span className="w-8 text-center font-bold text-gray-900">{item.quantity}</span>
-                      <button className="p-2 text-gray-400 hover:text-primary hover:bg-white rounded-lg transition-all shadow-sm">
+                      <button
+                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        className="p-2 text-gray-400 hover:text-primary hover:bg-white rounded-lg transition-all shadow-sm"
+                      >
                         <Plus size={16} />
                       </button>
                     </div>
-                    <button className="text-xs font-bold text-red-400 hover:text-red-500 flex items-center gap-1 transition-colors">
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      className="text-xs font-bold text-red-400 hover:text-red-500 flex items-center gap-1 transition-colors"
+                    >
                       <Trash2 size={14} /> Remove
                     </button>
                   </div>
                 </div>
               </motion.div>
-            ))}
+            )) : (
+              <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm text-center">
+                <p className="font-bold text-gray-900 mb-2">Your cart is empty</p>
+                <Link to="/shop" className="text-primary font-bold">Start shopping</Link>
+              </div>
+            )}
 
             <Link to="/shop" className="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all mt-4">
               <ArrowRight className="rotate-180" size={18} /> Continue Shopping
