@@ -177,7 +177,7 @@ const Wishlist = () => {
                 onClick={() =>
                   addToCart(item, 1)
                 }
-                className="mt-5 w-full bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-gray-900 font-black py-3 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg text-base"
+                className="mt-5 w-full bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-gray-900 font-black py-3 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg text-base cursor-pointer"
               >
 
                 <ShoppingBag size={18} />

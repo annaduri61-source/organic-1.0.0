@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import {
   Grid2X2,
@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSearchParams } from 'react-router-dom';
 
 import ProductCard from '../components/ProductCard';
 
@@ -19,6 +20,9 @@ const Shop = () => {
   // CATEGORY
   const [selectedCategory, setSelectedCategory] =
     useState('All');
+
+  const [searchParams, setSearchParams] =
+    useSearchParams();
 
   // SORT
   const [sortOption, setSortOption] =
@@ -36,10 +40,20 @@ const Shop = () => {
     useState(false);
 
   // CATEGORIES
-  const categories = [
-    'All',
-    ...new Set(products.map((p) => p.category)),
-  ];
+  const categories = useMemo(
+    () => ['All', ...new Set(products.map((p) => p.category))],
+    []
+  );
+
+  useEffect(() => {
+    const categoryParam = searchParams.get('category');
+
+    if (categoryParam && categories.includes(categoryParam)) {
+      setSelectedCategory(categoryParam);
+    } else {
+      setSelectedCategory('All');
+    }
+  }, [searchParams, categories]);
 
   // FILTER + SORT
   const filteredProducts = useMemo(() => {
@@ -289,11 +303,14 @@ const Shop = () => {
                           scale: 0.97,
                         }}
                         key={category}
-                        onClick={() =>
-                          setSelectedCategory(
-                            category
-                          )
-                        }
+                        onClick={() => {
+                          setSelectedCategory(category);
+                          setSearchParams(
+                            category === 'All'
+                              ? {}
+                              : { category }
+                          );
+                        }}
                         className={`w-full text-left px-5 py-4 rounded-2xl font-black transition-all ${
                           selectedCategory ===
                           category
