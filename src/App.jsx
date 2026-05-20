@@ -16,7 +16,7 @@ import Cart from './pages/Cart';
 import Wishlist from './pages/Wishlist';
 import Login from './pages/Login';
 import Register from './pages/Register';
-
+import ScrollToTop from './components/ScrollToTop';
 // Context
 import { WishlistProvider } from './context/WishlistContext';
 import { CartProvider } from './context/CartContext';
@@ -24,9 +24,10 @@ import { CartProvider } from './context/CartContext';
 function App() {
   return (
     <CartProvider>
+      
       <WishlistProvider>
         <Router>
-
+ <ScrollToTop />
           <div className="min-h-screen flex flex-col app-shell text-slate-950">
 
             <Navbar />
