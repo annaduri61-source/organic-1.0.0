@@ -125,6 +125,19 @@ const Navbar = () => {
 
                 <li>
                   <Link
+                    to="/categories"
+                    className={`transition-all duration-300 pb-1 border-b-2 ${
+                      isActive('/categories')
+                        ? 'text-green-600 border-green-600'
+                        : 'text-gray-700 border-transparent hover:text-green-600'
+                    }`}
+                  >
+                    Categories
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
                     to="/contact"
                     className={`transition-all duration-300 pb-1 border-b-2 ${
                       isActive('/contact')
@@ -265,6 +278,18 @@ const Navbar = () => {
                       className="text-lg font-bold hover:text-green-600 block"
                     >
                       Shop
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link
+                      to="/categories"
+                      onClick={() =>
+                        setIsMenuOpen(false)
+                      }
+                      className="text-lg font-bold hover:text-green-600 block"
+                    >
+                      Categories
                     </Link>
                   </li>
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -40,12 +41,12 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 mt-6 md:mt-8"
           >
-            <button className="px-6 sm:px-8 py-3 sm:py-4 bg-blue-500 text-white font-bold rounded-full shadow-lg shadow-primary/30 hover:bg-primary/90 hover:scale-105 transition-all transform uppercase tracking-wide text-xs sm:text-sm">
+            <Link
+              to="/shop"
+              className="inline-flex items-center justify-center px-8 py-4 bg-green-600 text-white font-black rounded-full shadow-2xl shadow-green-600/30 hover:bg-green-700 hover:scale-105 transition-all transform uppercase tracking-[0.18em] text-sm"
+            >
               Start Shopping
-            </button>
-            <button className="px-6 sm:px-8 py-3 sm:py-4 bg-white text-gray-800 font-bold rounded-full shadow-md hover:bg-gray-50 transition-all uppercase tracking-wide text-xs sm:text-sm">
-              Join Now
-            </button>
+            </Link>
           </motion.div>
 
           {/* Stats */}

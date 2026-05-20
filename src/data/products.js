@@ -122,9 +122,71 @@ export const products = [
       "https://images.unsplash.com/photo-1604977042946-1eecc30f269e?q=80&w=1200&auto=format&fit=crop",
   },
 
-  // DRINKS
+  // MEAT PRODUCTS
   {
     id: 9,
+    name: "Organic Chicken Breast",
+    category: "Meat Products",
+    price: 320,
+    oldPrice: 380,
+    discount: 15,
+    rating: 4.8,
+    reviews: 78,
+    description:
+      "Lean organic chicken breast, perfect for healthy meals.",
+    image:
+      "https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=1200&auto=format&fit=crop",
+  },
+
+  {
+    id: 10,
+    name: "Fresh Beef Steak",
+    category: "Meat Products",
+    price: 450,
+    oldPrice: 520,
+    discount: 13,
+    rating: 4.7,
+    reviews: 64,
+    description:
+      "Premium grass-fed beef steak for flavorful dinners.",
+    image:
+      "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200&auto=format&fit=crop",
+  },
+
+  // DAIRY & EGGS
+  {
+    id: 11,
+    name: "Farm Fresh Eggs",
+    category: "Dairy & Eggs",
+    price: 150,
+    oldPrice: 190,
+    discount: 12,
+    rating: 4.9,
+    reviews: 100,
+    description:
+      "Organic farm fresh eggs with strong shells and rich yolks.",
+    image:
+      "https://images.unsplash.com/photo-1517059224940-d4af9eec41e8?q=80&w=1200&auto=format&fit=crop",
+  },
+
+  {
+    id: 12,
+    name: "Greek Yogurt",
+    category: "Dairy & Eggs",
+    price: 90,
+    oldPrice: 120,
+    discount: 10,
+    rating: 4.8,
+    reviews: 84,
+    description:
+      "Creamy organic Greek yogurt packed with protein.",
+    image:
+      "https://images.unsplash.com/photo-1497534446932-c925b458314e?q=80&w=1200&auto=format&fit=crop",
+  },
+
+  // DRINKS
+  {
+    id: 13,
     name: "Orange Juice",
     category: "Drinks",
     price: 180,

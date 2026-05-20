@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Shop from './pages/Shop';
+import Categories from './pages/Categories';
 import SingleProduct from './pages/SingleProduct';
 import Cart from './pages/Cart';
 import Wishlist from './pages/Wishlist';
@@ -41,6 +42,8 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
 
                 <Route path="/shop" element={<Shop />} />
+
+                <Route path="/categories" element={<Categories />} />
 
                 <Route path="/product/:id" element={<SingleProduct />} />
 

@@ -212,7 +212,7 @@ const SingleProduct = () => {
               {/* UPDATED BUTTON */}
               <button
                 onClick={handleAddToCart}
-                className="flex-grow bg-yellow-400 text-gray-900 font-black py-5 rounded-[24px] shadow-2xl hover:scale-[1.05] transition-all flex items-center justify-center gap-4 text-lg"
+                className="flex-grow bg-yellow-400 text-gray-900 font-black py-5 rounded-[24px] shadow-2xl hover:scale-[1.05] transition-all flex items-center justify-center gap-4 text-lg cursor-pointer"
               >
 
                 <ShoppingBag size={24} />
