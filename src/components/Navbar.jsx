@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import {
-  Search,
   User,
   Heart,
   ShoppingBag,
@@ -44,17 +43,17 @@ const Navbar = () => {
       {/* NAVBAR */}
       <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
 
-        {/* TOP */}
+        {/* MAIN NAVBAR */}
         <div className="container mx-auto px-4 py-3">
 
-          <div className="flex items-center justify-between gap-4 lg:gap-8">
+          <div className="flex items-center justify-between gap-3">
 
             {/* LEFT */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
 
               {/* MOBILE MENU */}
               <button
-                className="lg:hidden p-2 hover:bg-gray-100 rounded-xl transition-all"
+                className="lg:hidden p-2 hover:bg-gray-100 rounded-xl transition-all shrink-0"
                 onClick={() =>
                   setIsMenuOpen(true)
                 }
@@ -67,84 +66,100 @@ const Navbar = () => {
               {/* LOGO */}
               <Link
                 to="/"
-                className="flex items-center gap-3"
+                className="flex items-center gap-2 min-w-0"
               >
 
                 <img
                   src="/assets/logo.png"
                   alt="Organic"
-                  className="h-10 w-auto"
+                  className="h-9 w-auto object-contain shrink-0"
                 />
 
                 
               </Link>
             </div>
 
-            {/* SEARCH */}
-            <div className="hidden md:flex flex-grow max-w-2xl bg-gray-50 rounded-2xl border border-gray-100 px-4 py-2 items-center gap-3 shadow-sm">
+            {/* CENTER NAV */}
+            <nav className="hidden lg:flex justify-center flex-1">
 
-              <select className="bg-transparent border-none text-sm font-semibold text-gray-600 focus:ring-0 cursor-pointer pr-5">
+              <ul className="flex items-center gap-10 text-sm font-bold uppercase tracking-wider">
 
-                <option>
-                  All Categories
-                </option>
+                <li>
+                  <Link
+                    to="/"
+                    className={`transition-all duration-300 pb-1 border-b-2 ${
+                      isActive('/')
+                        ? 'text-green-600 border-green-600'
+                        : 'text-gray-700 border-transparent hover:text-green-600'
+                    }`}
+                  >
+                    Home
+                  </Link>
+                </li>
 
-                <option>
-                  Vegetables
-                </option>
+                <li>
+                  <Link
+                    to="/about"
+                    className={`transition-all duration-300 pb-1 border-b-2 ${
+                      isActive('/about')
+                        ? 'text-green-600 border-green-600'
+                        : 'text-gray-700 border-transparent hover:text-green-600'
+                    }`}
+                  >
+                    About
+                  </Link>
+                </li>
 
-                <option>
-                  Fruits
-                </option>
+                <li>
+                  <Link
+                    to="/shop"
+                    className={`transition-all duration-300 pb-1 border-b-2 ${
+                      isActive('/shop')
+                        ? 'text-green-600 border-green-600'
+                        : 'text-gray-700 border-transparent hover:text-green-600'
+                    }`}
+                  >
+                    Shop
+                  </Link>
+                </li>
 
-                <option>
-                  Drinks
-                </option>
-
-                <option>
-                  Snacks
-                </option>
-              </select>
-
-              <div className="w-px h-6 bg-gray-200"></div>
-
-              <div className="flex-grow flex items-center gap-2">
-
-                <Search
-                  size={18}
-                  className="text-gray-400"
-                />
-
-                <input
-                  type="text"
-                  placeholder="Search organic products..."
-                  className="w-full bg-transparent border-none focus:ring-0 text-sm py-1 outline-none"
-                />
-              </div>
-            </div>
+                <li>
+                  <Link
+                    to="/contact"
+                    className={`transition-all duration-300 pb-1 border-b-2 ${
+                      isActive('/contact')
+                        ? 'text-green-600 border-green-600'
+                        : 'text-gray-700 border-transparent hover:text-green-600'
+                    }`}
+                  >
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            </nav>
 
             {/* RIGHT */}
-            <div className="flex items-center gap-2 lg:gap-4">
+            <div className="flex items-center gap-1 sm:gap-2 shrink-0">
 
               {/* LOGIN */}
               <Link
                 to="/login"
-                className="p-3 hover:bg-gray-100 rounded-full transition-all text-gray-700"
+                className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-full transition-all text-gray-700"
               >
 
-                <User size={22} />
+                <User size={20} />
 
               </Link>
 
               {/* WISHLIST */}
               <Link
                 to="/wishlist"
-                className="p-3 hover:bg-pink-50 rounded-full transition-all text-gray-700 relative"
+                className="w-10 h-10 flex items-center justify-center hover:bg-pink-50 rounded-full transition-all text-gray-700 relative"
               >
 
-                <Heart size={22} />
+                <Heart size={20} />
 
-                <span className="absolute top-1 right-1 w-5 h-5 bg-pink-500 text-white text-[10px] flex items-center justify-center rounded-full font-bold">
+                <span className="absolute top-0 right-0 w-5 h-5 bg-pink-500 text-white text-[10px] flex items-center justify-center rounded-full font-bold">
                   {likedItems.length}
                 </span>
               </Link>
@@ -152,80 +167,18 @@ const Navbar = () => {
               {/* CART */}
               <Link
                 to="/cart"
-                className="p-3 bg-green-100 hover:bg-green-200 rounded-full transition-all text-green-700 relative"
+                className="w-10 h-10 sm:w-11 sm:h-11 bg-green-100 hover:bg-green-200 rounded-full transition-all text-green-700 relative flex items-center justify-center"
               >
 
-                <ShoppingBag size={22} />
+                <ShoppingBag size={20} />
 
-                <span className="absolute top-1 right-1 w-5 h-5 bg-green-600 text-white text-[10px] flex items-center justify-center rounded-full font-bold">
+                <span className="absolute top-0 right-0 w-5 h-5 bg-green-600 text-white text-[10px] flex items-center justify-center rounded-full font-bold">
                   {getCartCount()}
                 </span>
               </Link>
             </div>
           </div>
         </div>
-
-        {/* DESKTOP NAV */}
-        <nav className="hidden lg:block border-t border-gray-100 bg-white">
-
-          <div className="container mx-auto px-4">
-
-            <ul className="flex items-center justify-center gap-10 py-4 text-sm font-bold uppercase tracking-wider">
-
-              <li>
-                <Link
-                  to="/"
-                  className={`transition-all duration-300 pb-2 border-b-2 ${
-                    isActive('/')
-                      ? 'text-green-600 border-green-600'
-                      : 'text-gray-700 border-transparent hover:text-green-600'
-                  }`}
-                >
-                  Home
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  to="/about"
-                  className={`transition-all duration-300 pb-2 border-b-2 ${
-                    isActive('/about')
-                      ? 'text-green-600 border-green-600'
-                      : 'text-gray-700 border-transparent hover:text-green-600'
-                  }`}
-                >
-                  About
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  to="/shop"
-                  className={`transition-all duration-300 pb-2 border-b-2 ${
-                    isActive('/shop')
-                      ? 'text-green-600 border-green-600'
-                      : 'text-gray-700 border-transparent hover:text-green-600'
-                  }`}
-                >
-                  Shop
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  to="/contact"
-                  className={`transition-all duration-300 pb-2 border-b-2 ${
-                    isActive('/contact')
-                      ? 'text-green-600 border-green-600'
-                      : 'text-gray-700 border-transparent hover:text-green-600'
-                  }`}
-                >
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
 
         {/* MOBILE MENU */}
         <AnimatePresence>
@@ -276,7 +229,7 @@ const Navbar = () => {
                   </button>
                 </div>
 
-                {/* LINKS */}
+                {/* MOBILE LINKS */}
                 <ul className="space-y-5">
 
                   <li>
@@ -360,12 +313,14 @@ const Navbar = () => {
             onClick={() =>
               navigate('/cart')
             }
-            className="fixed bottom-6 right-6 z-[99999] bg-gradient-to-r from-green-500 to-lime-500 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 font-black hover:scale-105 transition-all"
+            className="fixed bottom-5 right-5 z-[99999] bg-gradient-to-r from-green-500 to-lime-500 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 font-black hover:scale-105 transition-all"
           >
 
-            <ShoppingBag size={22} />
+            <ShoppingBag size={20} />
 
-            Continue To Cart
+            <span className="hidden sm:block">
+              Continue To Cart
+            </span>
 
             <span className="bg-white text-green-600 px-2 py-1 rounded-lg text-xs">
               {getCartCount()}

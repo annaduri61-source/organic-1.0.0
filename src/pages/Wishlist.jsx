@@ -1,62 +1,193 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
-import { Trash2, ShoppingCart } from 'lucide-react';
+
+import {
+  Trash2,
+  ShoppingBag,
+  Heart,
+} from 'lucide-react';
+
+import { motion } from 'framer-motion';
+
 import { useWishlist } from '../context/WishlistContext';
+
 import { useCart } from '../context/CartContext';
 
 const Wishlist = () => {
-  const { likedItems, toggleWishlist } = useWishlist();
+
+  const {
+    likedItems,
+    toggleWishlist,
+  } = useWishlist();
+
   const { addToCart } = useCart();
 
-  return (
-    <div className="bg-gray-50/50 min-h-screen py-12">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center gap-3 mb-8">
-          <h1 className="text-3xl font-black text-gray-900">Your Wishlist</h1>
-          <p className="text-gray-500 font-medium">Products you liked</p>
-        </div>
+  // EMPTY STATE
+  if (likedItems.length === 0) {
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-4">
-            {likedItems.length ? (
-              likedItems.map((item, index) => (
-                <div key={item.id} className="bg-white p-4 rounded-3xl border border-gray-100 shadow-sm flex items-center gap-6">
-                  <div className="w-24 h-24 bg-gray-50 rounded-2xl p-4 flex-shrink-0 flex items-center justify-center">
-                    <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
-                  </div>
-                  <div className="flex-grow">
-                    <h3 className="font-bold text-gray-900">{item.name}</h3>
-                    <p className="font-black text-primary text-xl">₹{item.price.toFixed(2)}</p>
-                  </div>
-                  <div className="flex flex-col items-end gap-3">
-                    <button
-                      onClick={() => { addToCart(item, 1); toggleWishlist(item); }}
-                      className="flex items-center gap-2 bg-yellow-400 text-gray-900 py-2 px-3 rounded-xl font-bold hover:bg-yellow-500 transition-all"
-                    >
-                      <ShoppingCart size={16} /> Move to Cart
-                    </button>
-                    <button
-                      onClick={() => toggleWishlist(item)}
-                      className="text-xs font-bold text-red-400 hover:text-red-500 flex items-center gap-1 transition-colors"
-                    >
-                      <Trash2 size={14} /> Remove
-                    </button>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm text-center">
-                <p className="font-bold text-gray-900 mb-2">You haven't liked any products yet</p>
-                <Link to="/shop" className="text-primary font-bold">Browse products</Link>
-              </div>
-            )}
+    return (
+      <div className="min-h-screen flex items-center justify-center px-4">
+
+        <div className="text-center">
+
+          <div className="w-28 h-28 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-6">
+
+            <Heart
+              size={42}
+              className="text-pink-500"
+            />
+
           </div>
 
-          <aside className="bg-white p-6 rounded-3xl border border-gray-100 shadow-xl h-fit sticky top-24">
-            <h2 className="text-xl font-black text-gray-900 mb-4">Wishlist Summary</h2>
-            <p className="text-gray-500">Items: <span className="font-bold text-gray-900">{likedItems.length}</span></p>
-          </aside>
+          <h2 className="product-title text-3xl font-bold text-gray-800 mb-3">
+
+            Your Wishlist is Empty
+
+          </h2>
+
+          <p className="text-gray-500 mb-8">
+
+            Save your favorite products here.
+
+          </p>
+
+          <Link
+            to="/shop"
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-green-500 to-lime-500 text-white px-8 py-4 rounded-2xl font-bold shadow-xl hover:scale-105 transition-all"
+          >
+
+            <ShoppingBag size={20} />
+
+            Continue Shopping
+
+          </Link>
         </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen px-4 lg:px-8 py-10">
+
+      {/* TITLE */}
+      <div className="mb-10">
+
+        <h1 className="product-title text-4xl font-bold text-gray-800 mb-3">
+
+          My Wishlist
+
+        </h1>
+
+        <p className="text-gray-500">
+
+          Your saved favorite products
+
+        </p>
+      </div>
+
+      {/* PRODUCTS */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+        {likedItems.map((item) => (
+
+          <motion.div
+            key={item.id}
+            whileHover={{
+              y: -8,
+            }}
+            transition={{
+              type: 'spring',
+              stiffness: 250,
+            }}
+            className="bg-white rounded-[28px] overflow-hidden border border-gray-100 shadow-md hover:shadow-2xl transition-all duration-500"
+          >
+
+            {/* IMAGE */}
+            <div className="relative bg-gradient-to-br from-[#f7fff8] to-[#eefbf1] p-4">
+
+              <Link
+                to={`/product/${item.id}`}
+              >
+
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full h-48 object-cover rounded-2xl"
+                />
+
+              </Link>
+
+              {/* REMOVE */}
+              <button
+                onClick={() =>
+                  toggleWishlist(item)
+                }
+                className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition-all"
+              >
+
+                <Trash2 size={18} />
+
+              </button>
+            </div>
+
+            {/* CONTENT */}
+            <div className="p-5">
+
+              {/* CATEGORY */}
+              <p className="text-[10px] uppercase tracking-[0.25em] text-gray-400 font-bold mb-2">
+
+                {item.category}
+
+              </p>
+
+              {/* PRODUCT NAME */}
+              <Link
+                to={`/product/${item.id}`}
+              >
+
+                <h3 className="product-title text-lg font-bold text-gray-800 hover:text-green-600 transition-all duration-300 leading-6 min-h-[45px] cursor-pointer">
+
+                  {item.name}
+
+                </h3>
+
+              </Link>
+
+              {/* PRICE */}
+              <div className="flex items-center gap-2 mt-3">
+
+                <span className="text-3xl font-black text-green-600">
+
+                  ₹{item.price.toFixed(2)}
+
+                </span>
+
+                {item.oldPrice && (
+                  <del className="text-gray-300 font-bold text-sm">
+
+                    ₹{item.oldPrice.toFixed(2)}
+
+                  </del>
+                )}
+              </div>
+
+              {/* BUTTON */}
+              <button
+                onClick={() =>
+                  addToCart(item, 1)
+                }
+                className="mt-5 w-full bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-gray-900 font-black py-3 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg text-base"
+              >
+
+                <ShoppingBag size={18} />
+
+                Add To Cart
+
+              </button>
+            </div>
+          </motion.div>
+        ))}
       </div>
     </div>
   );

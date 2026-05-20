@@ -258,3 +258,8 @@
     font-weight: 600;
   }
 }
+
+/* PRODUCT TITLE FONT */
+.product-title {
+  font-family: var(--font-sans);
+}
