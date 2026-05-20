@@ -263,3 +263,12 @@
 .product-title {
   font-family: var(--font-sans);
 }
+/* PREMIUM BUTTON CURSOR */
+button {
+  cursor: pointer !important;
+}
+
+/* BUTTON CLICK EFFECT */
+button:active {
+  transform: scale(0.96);
+}

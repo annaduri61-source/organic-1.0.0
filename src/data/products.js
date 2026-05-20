@@ -1,6 +1,6 @@
 export const products = [
 
-  // FRUITS
+  /* FRUITS */
   {
     id: 1,
     name: "Fresh Red Apple",
@@ -61,7 +61,7 @@ export const products = [
       "https://images.unsplash.com/photo-1519162808019-7de1683fa2ad?q=80&w=1200&auto=format&fit=crop",
   },
 
-  // VEGETABLES
+  /* VEGETABLES */
   {
     id: 5,
     name: "Organic Carrot",
@@ -122,7 +122,7 @@ export const products = [
       "https://images.unsplash.com/photo-1604977042946-1eecc30f269e?q=80&w=1200&auto=format&fit=crop",
   },
 
-  // MEAT PRODUCTS
+  /* MEAT */
   {
     id: 9,
     name: "Organic Chicken Breast",
@@ -133,7 +133,7 @@ export const products = [
     rating: 4.8,
     reviews: 78,
     description:
-      "Lean organic chicken breast, perfect for healthy meals.",
+      "Lean organic chicken breast perfect for healthy meals.",
     image:
       "https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=1200&auto=format&fit=crop",
   },
@@ -153,7 +153,7 @@ export const products = [
       "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200&auto=format&fit=crop",
   },
 
-  // DAIRY & EGGS
+  /* DAIRY */
   {
     id: 11,
     name: "Farm Fresh Eggs",
@@ -164,7 +164,7 @@ export const products = [
     rating: 4.9,
     reviews: 100,
     description:
-      "Organic farm fresh eggs with strong shells and rich yolks.",
+      "Organic farm fresh eggs with rich yolks.",
     image:
       "https://images.unsplash.com/photo-1517059224940-d4af9eec41e8?q=80&w=1200&auto=format&fit=crop",
   },
@@ -184,7 +184,7 @@ export const products = [
       "https://images.unsplash.com/photo-1497534446932-c925b458314e?q=80&w=1200&auto=format&fit=crop",
   },
 
-  // DRINKS
+  /* DRINKS */
   {
     id: 13,
     name: "Orange Juice",
@@ -201,7 +201,7 @@ export const products = [
   },
 
   {
-    id: 10,
+    id: 14,
     name: "Fresh Milk",
     category: "Drinks",
     price: 90,
@@ -216,7 +216,7 @@ export const products = [
   },
 
   {
-    id: 11,
+    id: 15,
     name: "Strawberry Smoothie",
     category: "Drinks",
     price: 240,
@@ -231,7 +231,7 @@ export const products = [
   },
 
   {
-    id: 12,
+    id: 16,
     name: "Healthy Green Tea",
     category: "Drinks",
     price: 130,
@@ -240,77 +240,14 @@ export const products = [
     rating: 4.8,
     reviews: 73,
     description:
-      "Natural green tea for a healthy and refreshing lifestyle.",
+      "Natural green tea for a healthy lifestyle.",
     image:
       "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1200&auto=format&fit=crop",
   },
 
-  // SNACKS
-  {
-    id: 13,
-    name: "Organic Almonds",
-    category: "Snacks",
-    price: 320,
-    oldPrice: 380,
-    discount: 20,
-    rating: 5,
-    reviews: 150,
-    description:
-      "Premium quality organic almonds full of nutrition.",
-    image:
-      "https://images.unsplash.com/photo-1508747703725-719777637510?q=80&w=1200&auto=format&fit=crop",
-  },
-
-  {
-    id: 14,
-    name: "Healthy Cookies",
-    category: "Snacks",
-    price: 160,
-    oldPrice: 210,
-    discount: 15,
-    rating: 4.7,
-    reviews: 88,
-    description:
-      "Crunchy healthy cookies made with natural ingredients.",
-    image:
-      "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=1200&auto=format&fit=crop",
-  },
-
-  {
-    id: 15,
-    name: "Potato Chips",
-    category: "Snacks",
-    price: 110,
-    oldPrice: 150,
-    discount: 10,
-    rating: 4.5,
-    reviews: 65,
-    description:
-      "Crispy and delicious potato chips for snack lovers.",
-    image:
-      "https://images.unsplash.com/photo-1566478989037-eec170784d0b?q=80&w=1200&auto=format&fit=crop",
-  },
-
-  {
-    id: 16,
-    name: "Chocolate Cake",
-    category: "Snacks",
-    price: 280,
-    oldPrice: 340,
-    discount: 22,
-    rating: 5,
-    reviews: 180,
-    description:
-      "Soft and creamy chocolate cake with rich flavor.",
-    image:
-      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=1200&auto=format&fit=crop",
-  },
-
 ];
 
-// GET SINGLE PRODUCT
 export const getProductById = (id) => {
-
   return products.find(
     (product) =>
       product.id === Number(id)
