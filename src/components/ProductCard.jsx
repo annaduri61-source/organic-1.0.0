@@ -34,7 +34,7 @@ const ProductCard = ({ product }) => {
   const [isHovered, setIsHovered] =
     useState(false);
 
-  // ADD TO CART
+  /* ADD TO CART */
   const handleAddToCart = (e) => {
 
     e.preventDefault();
@@ -44,7 +44,7 @@ const ProductCard = ({ product }) => {
     addToCart(product, quantity);
   };
 
-  // WISHLIST
+  /* WISHLIST */
   const handleWishlist = (e) => {
 
     e.preventDefault();
@@ -71,47 +71,74 @@ const ProductCard = ({ product }) => {
         y: 0,
       }}
       whileHover={{
-        y: -16,
-        rotateX: 4,
-        rotateY: -4,
+        y: -12,
       }}
       transition={{
         type: 'spring',
         stiffness: 180,
         damping: 18,
       }}
-      className="group relative bg-white rounded-[34px] overflow-hidden border border-white/40 shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_25px_70px_rgba(0,0,0,0.16)] transition-all duration-700 max-w-[300px] mx-auto"
-      style={{
-        transformStyle: 'preserve-3d',
-      }}
+      className="
+      product-card
+      group
+      relative
+
+      bg-white/90
+      backdrop-blur-xl
+
+      rounded-[34px]
+      overflow-hidden
+
+      border
+      border-white/60
+
+      shadow-[0_10px_40px_rgba(34,197,94,0.08)]
+
+      hover:shadow-[0_25px_60px_rgba(34,197,94,0.18)]
+
+      transition-all
+      duration-700
+
+      max-w-full
+      mx-auto
+      "
     >
 
-      {/* ANIMATED GRADIENT BORDER */}
-      <motion.div
-        animate={{
-          opacity: isHovered ? 1 : 0,
-        }}
-        className="absolute inset-0 rounded-[34px] p-[1.5px] bg-gradient-to-br from-green-400 via-lime-300 to-yellow-300 z-0"
-      >
-
-        <div className="w-full h-full bg-white rounded-[34px]" />
-
-      </motion.div>
-
-      {/* GLOW */}
+      {/* SOFT GLOW */}
       <motion.div
         animate={{
           scale: isHovered ? 1.2 : 0.8,
-          opacity: isHovered ? 0.4 : 0,
+          opacity: isHovered ? 0.18 : 0,
         }}
         transition={{
           duration: 0.5,
         }}
-        className="absolute -top-20 -right-20 w-56 h-56 bg-green-300 rounded-full blur-3xl z-0"
+        className="
+        absolute
+        -top-20
+        -right-20
+        w-56
+        h-56
+        bg-green-300
+        rounded-full
+        blur-3xl
+        z-0
+        "
       />
 
       {/* IMAGE SECTION */}
-      <div className="relative bg-gradient-to-br from-[#f7fff8] via-[#f3fff5] to-[#eefbf1] p-4 overflow-hidden z-10">
+      <div className="
+      relative
+
+      bg-gradient-to-br
+      from-[#f5fff7]
+      via-[#f7fff9]
+      to-[#eefbf2]
+
+      p-4
+      overflow-hidden
+      z-10
+      ">
 
         {/* DISCOUNT */}
         {product.discount && (
@@ -128,10 +155,34 @@ const ProductCard = ({ product }) => {
               rotate: -5,
               scale: 1.05,
             }}
-            className="absolute top-4 left-4 z-30"
+            className="
+            absolute
+            top-4
+            left-4
+            z-30
+            "
           >
 
-            <span className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-[10px] uppercase tracking-[0.2em] font-black px-3 py-1.5 rounded-full shadow-xl">
+            <span className="
+            bg-gradient-to-r
+            from-green-500
+            to-lime-500
+
+            text-white
+
+            text-[10px]
+            uppercase
+            tracking-[0.2em]
+
+            font-black
+
+            px-3
+            py-1.5
+
+            rounded-full
+
+            shadow-xl
+            ">
 
               {product.discount}% OFF
 
@@ -143,9 +194,19 @@ const ProductCard = ({ product }) => {
         <motion.div
           animate={{
             x: isHovered ? 0 : 20,
-            opacity: isHovered ? 1 : 0.8,
+            opacity: isHovered ? 1 : 0.85,
           }}
-          className="absolute top-4 right-4 flex flex-col gap-3 z-30"
+          className="
+          absolute
+          top-4
+          right-4
+
+          flex
+          flex-col
+          gap-3
+
+          z-30
+          "
         >
 
           {/* WISHLIST */}
@@ -158,11 +219,28 @@ const ProductCard = ({ product }) => {
               rotate: 12,
             }}
             onClick={handleWishlist}
-            className={`w-11 h-11 rounded-full flex items-center justify-center shadow-2xl backdrop-blur-xl transition-all ${
+            className={`
+            w-11
+            h-11
+
+            rounded-full
+
+            flex
+            items-center
+            justify-center
+
+            shadow-xl
+
+            backdrop-blur-xl
+
+            transition-all
+
+            ${
               isLiked
                 ? 'bg-pink-500 text-white'
-                : 'bg-white/90 hover:bg-pink-50 hover:text-pink-500'
-            }`}
+                : 'bg-white hover:bg-pink-50 hover:text-pink-500'
+            }
+            `}
           >
 
             <Heart
@@ -189,7 +267,25 @@ const ProductCard = ({ product }) => {
                 scale: 1.15,
                 rotate: -12,
               }}
-              className="w-11 h-11 rounded-full flex items-center justify-center shadow-2xl bg-white/90 hover:bg-green-50 hover:text-green-600 transition-all"
+              className="
+              w-11
+              h-11
+
+              rounded-full
+
+              flex
+              items-center
+              justify-center
+
+              shadow-xl
+
+              bg-white
+
+              hover:bg-green-50
+              hover:text-green-600
+
+              transition-all
+              "
             >
 
               <Eye size={17} />
@@ -205,24 +301,30 @@ const ProductCard = ({ product }) => {
           <motion.div
             whileHover={{
               scale: 1.08,
-              rotate: 2,
             }}
             transition={{
               duration: 0.5,
             }}
-            className="overflow-hidden rounded-[28px]"
+            className="
+            overflow-hidden
+            rounded-[28px]
+            "
           >
 
             <motion.img
               animate={{
-                scale: isHovered ? 1.06 : 1,
+                scale: isHovered ? 1.05 : 1,
               }}
               transition={{
                 duration: 0.5,
               }}
               src={product.image}
               alt={product.name}
-              className="w-full h-44 object-cover cursor-pointer"
+              className="
+              w-full
+              h-56
+              object-cover
+              "
             />
 
           </motion.div>
@@ -233,33 +335,52 @@ const ProductCard = ({ product }) => {
       {/* CONTENT */}
       <div className="relative p-5 z-10">
 
-        {/* CATEGORY + RATING */}
-        <div className="flex items-center justify-between mb-3">
+        {/* CATEGORY */}
+        <div className="
+        flex
+        items-center
+        justify-between
+        mb-3
+        ">
 
-          <p className="text-[10px] uppercase tracking-[0.25em] text-gray-400 font-bold">
+          <p className="
+          text-[10px]
+          uppercase
+          tracking-[0.25em]
+
+          text-gray-400
+
+          font-bold
+          ">
 
             {product.category}
 
           </p>
 
-          <motion.div
-            whileHover={{
-              scale: 1.1,
-            }}
-            className="flex items-center gap-1 text-yellow-500"
-          >
+          <div className="
+          flex
+          items-center
+          gap-1
+
+          text-yellow-500
+          ">
 
             <Star
               size={14}
               fill="currentColor"
             />
 
-            <span className="text-sm font-bold text-gray-700">
+            <span className="
+            text-sm
+            font-bold
+            text-gray-700
+            ">
 
               {product.rating || 4.8}
 
             </span>
-          </motion.div>
+
+          </div>
         </div>
 
         {/* PRODUCT NAME */}
@@ -269,7 +390,22 @@ const ProductCard = ({ product }) => {
             whileHover={{
               x: 4,
             }}
-            className="product-title text-lg font-bold text-gray-800 hover:text-green-600 transition-all duration-300 leading-6 min-h-[48px] cursor-pointer"
+            className="
+            product-title
+
+            text-lg
+            font-bold
+
+            text-slate-800
+
+            hover:text-green-600
+
+            transition-all
+            duration-300
+
+            leading-6
+            min-h-[48px]
+            "
           >
 
             {product.name}
@@ -279,28 +415,48 @@ const ProductCard = ({ product }) => {
         </Link>
 
         {/* DESCRIPTION */}
-        <p className="text-sm text-gray-500 leading-6 mt-2 line-clamp-2">
+        <p className="
+        text-sm
+        text-gray-500
+
+        leading-6
+        mt-2
+
+        line-clamp-2
+        ">
 
           {product.description}
 
         </p>
 
         {/* PRICE */}
-        <div className="flex items-end gap-2 mt-4">
+        <div className="
+        flex
+        items-end
+        gap-2
+        mt-4
+        ">
 
-          <motion.span
-            whileHover={{
-              scale: 1.05,
-            }}
-            className="text-3xl font-black text-green-600 tracking-tight"
-          >
+          <span className="
+          text-3xl
+          font-black
+
+          text-green-600
+
+          tracking-tight
+          ">
 
             ₹{product.price.toFixed(2)}
 
-          </motion.span>
+          </span>
 
           {product.oldPrice && (
-            <del className="text-gray-300 font-bold text-sm mb-1">
+            <del className="
+            text-gray-300
+            font-bold
+            text-sm
+            mb-1
+            ">
 
               ₹{product.oldPrice.toFixed(2)}
 
@@ -309,21 +465,28 @@ const ProductCard = ({ product }) => {
         </div>
 
         {/* QUANTITY */}
-        <motion.div
-          whileHover={{
-            scale: 1.02,
-          }}
-          className="mt-5 flex items-center justify-between bg-gray-50 border border-gray-100 rounded-2xl px-3 py-2 shadow-sm"
-        >
+        <div className="
+        mt-5
+
+        flex
+        items-center
+        justify-between
+
+        bg-green-50
+
+        border
+        border-green-100
+
+        rounded-2xl
+
+        px-3
+        py-2
+        ">
 
           {/* MINUS */}
           <motion.button
             whileTap={{
               scale: 0.85,
-            }}
-            whileHover={{
-              rotate: -8,
-              scale: 1.1,
             }}
             onClick={(e) => {
 
@@ -333,7 +496,25 @@ const ProductCard = ({ product }) => {
                 Math.max(1, quantity - 1)
               );
             }}
-            className="w-9 h-9 rounded-xl bg-white shadow hover:bg-gray-100 flex items-center justify-center transition-all"
+            className="
+            w-9
+            h-9
+
+            rounded-xl
+
+            bg-white
+
+            hover:bg-green-500
+            hover:text-white
+
+            shadow-sm
+
+            flex
+            items-center
+            justify-center
+
+            transition-all
+            "
           >
 
             <Minus size={15} />
@@ -341,29 +522,21 @@ const ProductCard = ({ product }) => {
           </motion.button>
 
           {/* VALUE */}
-          <motion.span
-            key={quantity}
-            initial={{
-              scale: 1.4,
-            }}
-            animate={{
-              scale: 1,
-            }}
-            className="text-lg font-black text-gray-800"
-          >
+          <span className="
+          text-lg
+          font-black
+
+          text-slate-800
+          ">
 
             {quantity}
 
-          </motion.span>
+          </span>
 
           {/* PLUS */}
           <motion.button
             whileTap={{
               scale: 0.85,
-            }}
-            whileHover={{
-              rotate: 8,
-              scale: 1.1,
             }}
             onClick={(e) => {
 
@@ -371,44 +544,136 @@ const ProductCard = ({ product }) => {
 
               setQuantity(quantity + 1);
             }}
-            className="w-9 h-9 rounded-xl bg-white shadow hover:bg-gray-100 flex items-center justify-center transition-all"
+            className="
+            w-9
+            h-9
+
+            rounded-xl
+
+            bg-white
+
+            hover:bg-green-500
+            hover:text-white
+
+            shadow-sm
+
+            flex
+            items-center
+            justify-center
+
+            transition-all
+            "
           >
 
             <Plus size={15} />
 
           </motion.button>
-        </motion.div>
+        </div>
 
-        {/* BUTTON */}
+        {/* ADD TO CART */}
         <motion.button
           whileTap={{
-            scale: 0.95,
+            scale: 0.92,
           }}
           whileHover={{
             scale: 1.03,
-            y: -2,
+            y: -3,
           }}
           onClick={handleAddToCart}
-          className="relative overflow-hidden mt-5 w-full bg-gradient-to-r from-yellow-400 via-orange-400 to-orange-500 hover:from-yellow-500 hover:to-orange-500 text-gray-900 font-black py-3 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 shadow-xl text-base cursor-pointer"
+          className="
+          group
+          relative
+          overflow-hidden
+
+          mt-5
+          w-full
+
+          bg-gradient-to-r
+          from-green-500
+          via-lime-500
+          to-green-600
+
+          hover:from-green-400
+          hover:via-lime-400
+          hover:to-green-500
+
+          text-white
+          font-black
+
+          py-3.5
+          rounded-2xl
+
+          transition-all
+          duration-300
+
+          flex
+          items-center
+          justify-center
+          gap-3
+
+          shadow-[0_10px_35px_rgba(34,197,94,0.25)]
+
+          text-base
+          tracking-wide
+
+          cursor-pointer
+          "
         >
 
-          {/* BUTTON GLOW */}
-          <motion.div
-            animate={{
-              x: isHovered
-                ? '120%'
-                : '-120%',
-            }}
-            transition={{
-              duration: 1,
-              repeat: Infinity,
-            }}
-            className="absolute inset-y-0 w-16 bg-white/30 blur-xl rotate-12"
+          {/* GLOW */}
+          <div
+            className="
+            absolute
+            inset-0
+
+            opacity-0
+            group-hover:opacity-100
+
+            transition-opacity
+            duration-500
+
+            bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.25),transparent_70%)]
+            "
           />
 
-          <ShoppingBag size={18} />
+          {/* SHINE */}
+          <div
+            className="
+            absolute
+            top-0
+            -left-24
 
-          Add To Cart
+            w-20
+            h-full
+
+            bg-white/20
+
+            skew-x-12
+
+            group-hover:left-[120%]
+
+            transition-all
+            duration-1000
+            "
+          />
+
+          {/* ICON */}
+          <motion.div
+            whileHover={{
+              rotate: -10,
+              scale: 1.15,
+            }}
+            className="relative z-10"
+          >
+
+            <ShoppingBag size={20} />
+
+          </motion.div>
+
+          {/* TEXT */}
+          <span className="relative z-10">
+            Add To Cart
+          </span>
 
         </motion.button>
       </div>
