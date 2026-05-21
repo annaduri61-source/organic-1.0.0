@@ -7,6 +7,7 @@ import {
   Plus,
   Minus,
   Star,
+  Sparkles,
 } from 'lucide-react';
 
 import { motion } from 'framer-motion';
@@ -34,7 +35,10 @@ const ProductCard = ({ product }) => {
   const [isHovered, setIsHovered] =
     useState(false);
 
+  /* ================================================= */
   /* ADD TO CART */
+  /* ================================================= */
+
   const handleAddToCart = (e) => {
 
     e.preventDefault();
@@ -44,7 +48,10 @@ const ProductCard = ({ product }) => {
     addToCart(product, quantity);
   };
 
+  /* ================================================= */
   /* WISHLIST */
+  /* ================================================= */
+
   const handleWishlist = (e) => {
 
     e.preventDefault();
@@ -64,14 +71,17 @@ const ProductCard = ({ product }) => {
       }
       initial={{
         opacity: 0,
-        y: 40,
+        y: 60,
       }}
       animate={{
         opacity: 1,
         y: 0,
       }}
       whileHover={{
-        y: -12,
+        y: -18,
+        rotateX: 10,
+        rotateY: -10,
+        scale: 1.02,
       }}
       transition={{
         type: 'spring',
@@ -79,69 +89,130 @@ const ProductCard = ({ product }) => {
         damping: 18,
       }}
       className="
-      product-card
       group
       relative
 
-      bg-white/90
-      backdrop-blur-xl
+      bg-gradient-to-b
+      from-white/[0.08]
+      to-white/[0.03]
 
-      rounded-[34px]
+      backdrop-blur-[30px]
+
+      rounded-[36px]
       overflow-hidden
 
       border
-      border-white/60
+      border-white/10
 
-      shadow-[0_10px_40px_rgba(34,197,94,0.08)]
-
-      hover:shadow-[0_25px_60px_rgba(34,197,94,0.18)]
+      shadow-[0_25px_90px_rgba(0,0,0,0.45)]
 
       transition-all
       duration-700
 
       max-w-full
       mx-auto
+
+      hover:border-green-400/30
       "
+      style={{
+        transformStyle: 'preserve-3d',
+      }}
     >
 
-      {/* SOFT GLOW */}
-      <motion.div
-        animate={{
-          scale: isHovered ? 1.2 : 0.8,
-          opacity: isHovered ? 0.18 : 0,
-        }}
-        transition={{
-          duration: 0.5,
-        }}
-        className="
-        absolute
-        -top-20
-        -right-20
-        w-56
-        h-56
-        bg-green-300
-        rounded-full
-        blur-3xl
-        z-0
-        "
-      />
+      {/* ================================================= */}
+      {/* GLOW */}
+      {/* ================================================= */}
 
+      <div className="
+      absolute
+      inset-0
+
+      opacity-0
+      group-hover:opacity-100
+
+      transition-all
+      duration-700
+
+      bg-[radial-gradient(circle_at_top_right,rgba(34,197,94,0.18),transparent_40%)]
+
+      pointer-events-none
+      " />
+
+      {/* ================================================= */}
+      {/* SHINE */}
+      {/* ================================================= */}
+
+      <div className="
+      absolute
+      inset-0
+
+      before:absolute
+      before:inset-0
+
+      before:bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent)]
+
+      before:translate-x-[-200%]
+
+      group-hover:before:translate-x-[200%]
+
+      before:transition-transform
+      before:duration-[1800ms]
+      " />
+
+      {/* ================================================= */}
       {/* IMAGE SECTION */}
+      {/* ================================================= */}
+
       <div className="
       relative
-
-      bg-gradient-to-br
-      from-[#f5fff7]
-      via-[#f7fff9]
-      to-[#eefbf2]
-
-      p-4
+      h-[290px]
       overflow-hidden
-      z-10
       ">
 
+        {/* IMAGE */}
+        <Link to={`/product/${product.id}`}>
+
+          <motion.img
+            animate={{
+              scale: isHovered ? 1.06 : 1,
+            }}
+            transition={{
+              duration: 0.7,
+            }}
+            src={product.image}
+            alt={product.name}
+            className="
+            w-full
+            h-full
+            object-cover
+
+            group-hover:scale-110
+            group-hover:rotate-2
+
+            transition-all
+            duration-1000
+            "
+          />
+
+        </Link>
+
+        {/* OVERLAY */}
+        <div className="
+        absolute
+        inset-0
+
+        bg-gradient-to-t
+        from-[#050816]
+        via-[#050816]/20
+        to-transparent
+        " />
+
+        {/* ================================================= */}
         {/* DISCOUNT */}
+        {/* ================================================= */}
+
         {product.discount && (
+
           <motion.div
             initial={{
               scale: 0,
@@ -152,8 +223,7 @@ const ProductCard = ({ product }) => {
               rotate: 0,
             }}
             whileHover={{
-              rotate: -5,
-              scale: 1.05,
+              scale: 1.08,
             }}
             className="
             absolute
@@ -163,38 +233,44 @@ const ProductCard = ({ product }) => {
             "
           >
 
-            <span className="
+            <div className="
+            px-4
+            py-2
+
+            rounded-2xl
+
             bg-gradient-to-r
-            from-green-500
-            to-lime-500
+            from-green-400
+            to-emerald-600
 
             text-white
 
+            font-black
             text-[10px]
-            uppercase
+
             tracking-[0.2em]
 
-            font-black
-
-            px-3
-            py-1.5
-
-            rounded-full
-
-            shadow-xl
+            shadow-[0_10px_30px_rgba(34,197,94,0.4)]
             ">
 
               {product.discount}% OFF
 
-            </span>
+            </div>
+
           </motion.div>
         )}
 
-        {/* ACTIONS */}
+        {/* ================================================= */}
+        {/* ACTION BUTTONS */}
+        {/* ================================================= */}
+
         <motion.div
           animate={{
             x: isHovered ? 0 : 20,
-            opacity: isHovered ? 1 : 0.85,
+            opacity: isHovered ? 1 : 0,
+          }}
+          transition={{
+            duration: 0.4,
           }}
           className="
           absolute
@@ -203,7 +279,7 @@ const ProductCard = ({ product }) => {
 
           flex
           flex-col
-          gap-3
+          gap-2
 
           z-30
           "
@@ -212,33 +288,36 @@ const ProductCard = ({ product }) => {
           {/* WISHLIST */}
           <motion.button
             whileTap={{
-              scale: 0.85,
+              scale: 0.9,
             }}
             whileHover={{
-              scale: 1.15,
-              rotate: 12,
+              scale: 1.1,
+              rotate: 10,
             }}
             onClick={handleWishlist}
             className={`
             w-11
             h-11
 
-            rounded-full
+            rounded-2xl
 
             flex
             items-center
             justify-center
 
-            shadow-xl
+            backdrop-blur-3xl
 
-            backdrop-blur-xl
+            border
+            border-white/10
+
+            shadow-xl
 
             transition-all
 
             ${
               isLiked
                 ? 'bg-pink-500 text-white'
-                : 'bg-white hover:bg-pink-50 hover:text-pink-500'
+                : 'bg-black/40 text-white hover:bg-pink-500'
             }
             `}
           >
@@ -261,28 +340,33 @@ const ProductCard = ({ product }) => {
 
             <motion.button
               whileTap={{
-                scale: 0.85,
+                scale: 0.9,
               }}
               whileHover={{
-                scale: 1.15,
-                rotate: -12,
+                scale: 1.1,
+                rotate: -10,
               }}
               className="
               w-11
               h-11
 
-              rounded-full
+              rounded-2xl
 
               flex
               items-center
               justify-center
 
+              bg-black/40
+              backdrop-blur-3xl
+
+              border
+              border-white/10
+
+              text-white
+
+              hover:bg-green-500
+
               shadow-xl
-
-              bg-white
-
-              hover:bg-green-50
-              hover:text-green-600
 
               transition-all
               "
@@ -293,87 +377,86 @@ const ProductCard = ({ product }) => {
             </motion.button>
 
           </Link>
+
         </motion.div>
 
-        {/* IMAGE */}
-        <Link to={`/product/${product.id}`}>
-
-          <motion.div
-            whileHover={{
-              scale: 1.08,
-            }}
-            transition={{
-              duration: 0.5,
-            }}
-            className="
-            overflow-hidden
-            rounded-[28px]
-            "
-          >
-
-            <motion.img
-              animate={{
-                scale: isHovered ? 1.05 : 1,
-              }}
-              transition={{
-                duration: 0.5,
-              }}
-              src={product.image}
-              alt={product.name}
-              className="
-              w-full
-              h-56
-              object-cover
-              "
-            />
-
-          </motion.div>
-
-        </Link>
-      </div>
-
-      {/* CONTENT */}
-      <div className="relative p-5 z-10">
-
+        {/* ================================================= */}
         {/* CATEGORY */}
+        {/* ================================================= */}
+
         <div className="
-        flex
-        items-center
-        justify-between
-        mb-3
+        absolute
+        bottom-4
+        left-4
+        z-20
         ">
 
-          <p className="
+          <div className="
+          px-4
+          py-2
+
+          rounded-full
+
+          bg-black/40
+          backdrop-blur-xl
+
+          border
+          border-white/10
+
           text-[10px]
           uppercase
           tracking-[0.25em]
 
-          text-gray-400
-
-          font-bold
+          font-black
+          text-green-300
           ">
 
             {product.category}
 
-          </p>
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* ================================================= */}
+      {/* CONTENT */}
+      {/* ================================================= */}
+
+      <div className="
+      relative
+      p-5
+      z-10
+      ">
+
+        {/* ================================================= */}
+        {/* RATING */}
+        {/* ================================================= */}
+
+        <div className="
+        flex
+        items-center
+        justify-between
+
+        mb-3
+        ">
 
           <div className="
           flex
           items-center
-          gap-1
-
-          text-yellow-500
+          gap-2
           ">
 
             <Star
               size={14}
               fill="currentColor"
+              className="text-yellow-400"
             />
 
             <span className="
-            text-sm
+            text-xs
             font-bold
-            text-gray-700
+            text-gray-300
             ">
 
               {product.rating || 4.8}
@@ -381,30 +464,41 @@ const ProductCard = ({ product }) => {
             </span>
 
           </div>
+
+          <Sparkles
+            size={16}
+            className="
+            text-green-400
+            opacity-70
+            "
+          />
+
         </div>
 
+        {/* ================================================= */}
         {/* PRODUCT NAME */}
+        {/* ================================================= */}
+
         <Link to={`/product/${product.id}`}>
 
           <motion.h3
             whileHover={{
-              x: 4,
+              x: 3,
             }}
             className="
-            product-title
+            text-[24px]
+            font-black
 
-            text-lg
-            font-bold
+            tracking-[-1px]
 
-            text-slate-800
+            text-white
 
-            hover:text-green-600
+            leading-[1.1]
 
             transition-all
             duration-300
 
-            leading-6
-            min-h-[48px]
+            group-hover:text-green-300
             "
           >
 
@@ -414,13 +508,17 @@ const ProductCard = ({ product }) => {
 
         </Link>
 
+        {/* ================================================= */}
         {/* DESCRIPTION */}
+        {/* ================================================= */}
+
         <p className="
-        text-sm
-        text-gray-500
+        text-gray-400
 
         leading-6
-        mt-2
+        text-[13px]
+
+        mt-3
 
         line-clamp-2
         ">
@@ -429,21 +527,30 @@ const ProductCard = ({ product }) => {
 
         </p>
 
+        {/* ================================================= */}
         {/* PRICE */}
+        {/* ================================================= */}
+
         <div className="
         flex
         items-end
-        gap-2
-        mt-4
+        gap-3
+
+        mt-5
         ">
 
           <span className="
-          text-3xl
+          text-4xl
           font-black
 
-          text-green-600
+          tracking-[-2px]
 
-          tracking-tight
+          bg-gradient-to-r
+          from-green-300
+          to-emerald-500
+
+          bg-clip-text
+          text-transparent
           ">
 
             ₹{product.price.toFixed(2)}
@@ -451,10 +558,11 @@ const ProductCard = ({ product }) => {
           </span>
 
           {product.oldPrice && (
+
             <del className="
-            text-gray-300
+            text-gray-500
+            text-base
             font-bold
-            text-sm
             mb-1
             ">
 
@@ -462,9 +570,13 @@ const ProductCard = ({ product }) => {
 
             </del>
           )}
+
         </div>
 
+        {/* ================================================= */}
         {/* QUANTITY */}
+        {/* ================================================= */}
+
         <div className="
         mt-5
 
@@ -472,15 +584,15 @@ const ProductCard = ({ product }) => {
         items-center
         justify-between
 
-        bg-green-50
+        bg-black/30
 
         border
-        border-green-100
+        border-white/10
 
-        rounded-2xl
+        rounded-[20px]
 
         px-3
-        py-2
+        py-3
         ">
 
           {/* MINUS */}
@@ -497,17 +609,16 @@ const ProductCard = ({ product }) => {
               );
             }}
             className="
-            w-9
-            h-9
+            w-10
+            h-10
 
             rounded-xl
 
-            bg-white
+            bg-white/5
 
             hover:bg-green-500
-            hover:text-white
 
-            shadow-sm
+            text-white
 
             flex
             items-center
@@ -517,16 +628,15 @@ const ProductCard = ({ product }) => {
             "
           >
 
-            <Minus size={15} />
+            <Minus size={16} />
 
           </motion.button>
 
           {/* VALUE */}
           <span className="
-          text-lg
+          text-xl
           font-black
-
-          text-slate-800
+          text-white
           ">
 
             {quantity}
@@ -545,17 +655,16 @@ const ProductCard = ({ product }) => {
               setQuantity(quantity + 1);
             }}
             className="
-            w-9
-            h-9
+            w-10
+            h-10
 
             rounded-xl
 
-            bg-white
+            bg-white/5
 
             hover:bg-green-500
-            hover:text-white
 
-            shadow-sm
+            text-white
 
             flex
             items-center
@@ -565,19 +674,23 @@ const ProductCard = ({ product }) => {
             "
           >
 
-            <Plus size={15} />
+            <Plus size={16} />
 
           </motion.button>
+
         </div>
 
-        {/* ADD TO CART */}
+        {/* ================================================= */}
+        {/* BUTTON */}
+        {/* ================================================= */}
+
         <motion.button
           whileTap={{
-            scale: 0.92,
+            scale: 0.95,
           }}
           whileHover={{
-            scale: 1.03,
-            y: -3,
+            scale: 1.02,
+            y: -2,
           }}
           onClick={handleAddToCart}
           className="
@@ -588,95 +701,65 @@ const ProductCard = ({ product }) => {
           mt-5
           w-full
 
+          rounded-[22px]
+
           bg-gradient-to-r
-          from-green-500
-          via-lime-500
+          from-green-400
+          via-emerald-500
           to-green-600
 
-          hover:from-green-400
-          hover:via-lime-400
-          hover:to-green-500
+          py-4
 
-          text-white
           font-black
+          tracking-[0.08em]
+          uppercase
 
-          py-3.5
-          rounded-2xl
-
-          transition-all
-          duration-300
+          text-sm
+          text-white
 
           flex
           items-center
           justify-center
           gap-3
 
-          shadow-[0_10px_35px_rgba(34,197,94,0.25)]
+          shadow-[0_20px_50px_rgba(34,197,94,0.4)]
 
-          text-base
-          tracking-wide
+          hover:shadow-[0_25px_70px_rgba(34,197,94,0.6)]
 
-          cursor-pointer
+          transition-all
+          duration-500
           "
         >
 
-          {/* GLOW */}
-          <div
-            className="
-            absolute
-            inset-0
-
-            opacity-0
-            group-hover:opacity-100
-
-            transition-opacity
-            duration-500
-
-            bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.25),transparent_70%)]
-            "
-          />
-
           {/* SHINE */}
-          <div
-            className="
-            absolute
-            top-0
-            -left-24
+          <div className="
+          absolute
+          top-0
+          -left-24
 
-            w-20
-            h-full
+          w-20
+          h-full
 
-            bg-white/20
+          bg-white/20
 
-            skew-x-12
+          skew-x-12
 
-            group-hover:left-[120%]
+          group-hover:left-[120%]
 
-            transition-all
-            duration-1000
-            "
-          />
+          transition-all
+          duration-1000
+          " />
 
-          {/* ICON */}
-          <motion.div
-            whileHover={{
-              rotate: -10,
-              scale: 1.15,
-            }}
-            className="relative z-10"
-          >
+          <ShoppingBag size={18} />
 
-            <ShoppingBag size={20} />
-
-          </motion.div>
-
-          {/* TEXT */}
-          <span className="relative z-10">
+          <span>
             Add To Cart
           </span>
 
         </motion.button>
+
       </div>
+
     </motion.div>
   );
 };
