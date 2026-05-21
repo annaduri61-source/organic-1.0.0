@@ -2,9 +2,9 @@ import React from 'react';
 import { Leaf, Award, Truck, ShieldCheck } from 'lucide-react';
 
 const FeatureItem = ({ icon: Icon, title, description, colorClass }) => (
-  <div className={`p-8 flex items-start gap-6 border-r border-gray-100 last:border-0 ${colorClass}`}>
+  <div className={`p-4 pt-28 flex items-start gap-6  last:border-0 ${colorClass}`}>
     <div className="flex-shrink-0 p-4 bg-white/20 rounded-2xl backdrop-blur-sm">
-      <Icon size={32} className="text-white" />
+      <Icon size={32} className="text-black" />
     </div>
     <div>
       <h5 className="text-xl font-bold text-white mb-2">{title}</h5>
@@ -15,7 +15,7 @@ const FeatureItem = ({ icon: Icon, title, description, colorClass }) => (
 
 const Features = () => {
   return (
-    <section className="container mx-auto px-4 -mt-16 relative z-20">
+    <section className="container mx-auto px-4 -mt-26 relative z-20">
       <div className="grid grid-cols-1 md:grid-cols-3 rounded-[32px] overflow-hidden shadow-2xl shadow-black/10">
         <FeatureItem 
           icon={Leaf} 

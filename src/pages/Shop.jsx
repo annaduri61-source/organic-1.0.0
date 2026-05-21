@@ -8,10 +8,10 @@ import {
   Grid2X2,
   LayoutGrid,
   Search,
-  Sparkles,
   SlidersHorizontal,
   ChevronLeft,
   ChevronRight,
+  Leaf,
 } from 'lucide-react';
 
 import {
@@ -24,41 +24,33 @@ import {
 } from 'react-router-dom';
 
 import ProductCard from '../components/ProductCard';
-
 import { products } from '../data/products';
 
 const Shop = () => {
 
-  /* CATEGORY */
   const [selectedCategory, setSelectedCategory] =
     useState('All');
 
   const [searchParams, setSearchParams] =
     useSearchParams();
 
-  /* SORT */
   const [sortOption, setSortOption] =
     useState('newest');
 
-  /* GRID */
   const [gridCols, setGridCols] =
     useState(4);
 
-  /* SEARCH */
   const [searchTerm, setSearchTerm] =
     useState('');
 
-  /* MOBILE FILTER */
   const [showFilters, setShowFilters] =
     useState(false);
 
-  /* PAGINATION */
   const [currentPage, setCurrentPage] =
     useState(1);
 
   const productsPerPage = 8;
 
-  /* CATEGORIES */
   const categories = useMemo(
     () => [
       'All',
@@ -85,7 +77,6 @@ const Shop = () => {
 
   }, [searchParams, categories]);
 
-  /* FILTER PRODUCTS */
   const filteredProducts = useMemo(() => {
 
     let filtered =
@@ -97,7 +88,6 @@ const Shop = () => {
               selectedCategory
           );
 
-    /* SEARCH */
     filtered = filtered.filter((product) =>
       product.name
         .toLowerCase()
@@ -106,7 +96,6 @@ const Shop = () => {
         )
     );
 
-    /* SORT */
     filtered.sort((a, b) => {
 
       if (sortOption === 'low') {
@@ -132,7 +121,6 @@ const Shop = () => {
     searchTerm,
   ]);
 
-  /* RESET PAGE */
   useEffect(() => {
     setCurrentPage(1);
   }, [
@@ -141,7 +129,6 @@ const Shop = () => {
     sortOption,
   ]);
 
-  /* PAGINATION */
   const indexOfLastProduct =
     currentPage * productsPerPage;
 
@@ -163,156 +150,419 @@ const Shop = () => {
   return (
     <div className="
     min-h-screen
-    bg-gradient-to-b
-    from-[#f7fff8]
-    via-white
-    to-[#f9fafb]
+    bg-[#050816]
+    overflow-hidden
+    relative
+    text-white
     ">
 
-      {/* HERO */}
-      <section className="
-      relative
-      overflow-hidden
-      py-16
-      ">
+      {/* ================================================= */}
+      {/* BACKGROUND */}
+      {/* ================================================= */}
 
-        {/* BLUR BG */}
+      <div className="absolute inset-0 overflow-hidden">
+
+        {/* GRID */}
         <div className="
         absolute
-        -top-20
-        -left-20
-        w-72
-        h-72
-        bg-green-200
-        rounded-full
-        blur-[120px]
-        opacity-40
+        inset-0
+        opacity-[0.06]
+
+        bg-[linear-gradient(rgba(255,255,255,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.15)_1px,transparent_1px)]
+
+        bg-[size:80px_80px]
         " />
 
+        {/* GLOW */}
         <div className="
         absolute
         top-0
-        right-0
-        w-72
-        h-72
-        bg-lime-200
-        rounded-full
-        blur-[120px]
-        opacity-40
+        left-0
+
+        w-[500px]
+        h-[500px]
+
+        bg-green-500/20
+        blur-[180px]
         " />
+
+        <div className="
+        absolute
+        bottom-0
+        right-0
+
+        w-[500px]
+        h-[500px]
+
+        bg-emerald-500/20
+        blur-[180px]
+        " />
+
+      </div>
+
+      {/* ================================================= */}
+      {/* HERO SECTION */}
+      {/* ================================================= */}
+
+      <section className="
+      relative
+      min-h-[90vh]
+
+      flex
+      items-center
+
+      overflow-hidden
+
+      pt-10
+
+      z-20
+      ">
+
+        {/* BACKGROUND IMAGE */}
+        <div className="absolute inset-0">
+
+          <img
+            src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1800&q=80"
+            alt=""
+            className="
+            w-full
+            h-full
+            object-cover
+            scale-105
+            "
+          />
+
+          {/* OVERLAY */}
+          <div className="
+          absolute
+          inset-0
+          bg-black/70
+          " />
+
+          {/* SIDE SHADOW */}
+          <div className="
+          absolute
+          inset-0
+
+          bg-gradient-to-r
+          from-[#050816]
+          via-[#050816]/70
+          to-transparent
+          " />
+
+        </div>
 
         <div className="
         container
         mx-auto
         px-4
         relative
-        z-10
+        z-20
         ">
 
-          <motion.div
-            initial={{
-              opacity: 0,
-              y: 40,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              duration: 0.6,
-            }}
-            className="text-center"
-          >
+          <div className="
+          grid
+          lg:grid-cols-2
+          gap-20
+          items-center
+          ">
 
-            {/* BADGE */}
-            <div className="
-            inline-flex
-            items-center
-            gap-2
-            bg-white
-            shadow-lg
-            border
-            border-gray-100
-            rounded-full
-            px-5
-            py-2
-            mb-6
-            ">
+            {/* LEFT */}
+            <motion.div
+              initial={{
+                opacity: 0,
+                x: -80,
+              }}
+              animate={{
+                opacity: 1,
+                x: 0,
+              }}
+              transition={{
+                duration: 1,
+              }}
+            >
 
-              <Sparkles
-                size={16}
-                className="text-yellow-500"
-              />
+              {/* TAG */}
+              <motion.div
+                animate={{
+                  x: [0, 10, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                }}
+                className="
+                inline-flex
+                items-center
+                gap-3
 
-              <span className="
-              text-sm
-              font-bold
-              text-gray-700
+                bg-green-500/10
+                border
+                border-green-400/20
+
+                px-6
+                py-3
+
+                rounded-full
+
+                backdrop-blur-xl
+
+                mb-8
+                "
+              >
+
+                <Leaf
+                  size={18}
+                  className="text-green-400"
+                />
+
+                <span className="
+                uppercase
+                tracking-[5px]
+                text-xs
+                font-bold
+                text-green-300
+                ">
+                  Organic Lifestyle
+                </span>
+
+              </motion.div>
+
+              {/* TITLE */}
+              <h1 className="
+              text-6xl
+              md:text-8xl
+
+              font-black
+
+              leading-[0.9]
               ">
-                Organic Premium Collection
-              </span>
-            </div>
 
-            {/* TITLE */}
-            <h1 className="
-            text-5xl
-            md:text-7xl
-            font-black
-            text-gray-900
-            leading-tight
-            ">
+                Fresh <br />
 
-              Fresh Organic
+                <motion.span
+                  animate={{
+                    opacity: [1, 0.7, 1],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                  }}
+                  className="
+                  text-green-400
+                  italic
+                  "
+                >
+                  Healthy
+                </motion.span>
 
-              <span className="
-              block
-              bg-gradient-to-r
-              from-green-500
-              to-lime-500
-              bg-clip-text
-              text-transparent
+                <br />
+
+                Market
+
+              </h1>
+
+              {/* DESC */}
+              <p className="
+              mt-8
+              max-w-2xl
+
+              text-xl
+              leading-relaxed
+
+              text-gray-300
               ">
-                Healthy Products
-              </span>
-            </h1>
 
-            {/* SUBTITLE */}
-            <p className="
-            max-w-2xl
-            mx-auto
-            text-gray-500
-            text-lg
-            mt-6
-            leading-8
-            ">
+                Experience premium organic shopping with
+                modern futuristic design, healthy foods,
+                farm fresh vegetables and immersive shopping.
 
-              Discover fresh organic foods,
-              healthy vegetables, fruits,
-              dairy products and groceries.
+              </p>
 
-            </p>
-          </motion.div>
+            </motion.div>
+
+            {/* RIGHT */}
+            <motion.div
+              initial={{
+                opacity: 0,
+                x: 100,
+              }}
+              animate={{
+                opacity: 1,
+                x: 0,
+              }}
+              transition={{
+                duration: 1,
+              }}
+              className="
+              relative
+              h-[700px]
+              hidden
+              lg:block
+              "
+            >
+
+              {/* MAIN IMAGE */}
+              <motion.div
+                animate={{
+                  y: [0, -20, 0],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                }}
+                className="
+                absolute
+                top-10
+                left-10
+
+                w-[500px]
+                h-[620px]
+
+                rounded-[40px]
+                overflow-hidden
+
+                shadow-[0_40px_120px_rgba(0,0,0,0.6)]
+                "
+              >
+
+                <img
+                  src="https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=1200&q=80"
+                  alt=""
+                  className="
+                  w-full
+                  h-full
+                  object-cover
+
+                  hover:scale-110
+                  transition-transform
+                  duration-1000
+                  "
+                />
+
+                <div className="
+                absolute
+                inset-0
+
+                bg-gradient-to-t
+                from-black/50
+                via-transparent
+                to-transparent
+                " />
+
+              </motion.div>
+
+              {/* SIDE IMAGE */}
+              <motion.div
+                animate={{
+                  y: [0, 20, 0],
+                }}
+                transition={{
+                  duration: 7,
+                  repeat: Infinity,
+                }}
+                className="
+                absolute
+                -right-10
+                top-32
+
+                w-[260px]
+                h-[340px]
+
+                rounded-[35px]
+                overflow-hidden
+
+                border
+                border-white/10
+
+                shadow-[0_20px_80px_rgba(0,0,0,0.5)]
+                "
+              >
+
+                <img
+                  src="https://images.unsplash.com/photo-1471193945509-9ad0617afabf?auto=format&fit=crop&w=1200&q=80"
+                  alt=""
+                  className="
+                  w-full
+                  h-full
+                  object-cover
+                  "
+                />
+
+              </motion.div>
+
+              {/* BOTTOM IMAGE */}
+              <motion.div
+                animate={{
+                  x: [0, 15, 0],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                }}
+                className="
+                absolute
+                bottom-0
+                right-20
+
+                w-[320px]
+                h-[220px]
+
+                rounded-[35px]
+                overflow-hidden
+
+                border
+                border-white/10
+
+                shadow-[0_20px_80px_rgba(0,0,0,0.5)]
+                "
+              >
+
+                <img
+                  src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=80"
+                  alt=""
+                  className="
+                  w-full
+                  h-full
+                  object-cover
+                  "
+                />
+
+              </motion.div>
+
+            </motion.div>
+
+          </div>
         </div>
       </section>
 
-      {/* MAIN */}
+      {/* ================================================= */}
+      {/* SHOP CONTENT */}
+      {/* ================================================= */}
+
       <section className="
+      relative
+      z-20
+
       container
       mx-auto
       px-4
-      pb-20
+      pb-24
       ">
 
         {/* TOPBAR */}
         <div className="
-        bg-white/80
-        backdrop-blur-xl
+        bg-white/5
+        backdrop-blur-3xl
+
         border
-        border-white/40
-        shadow-xl
-        rounded-[36px]
+        border-white/10
+
+        rounded-[35px]
+
         p-6
-        mb-10
+
+        mb-12
 
         flex
         flex-col
@@ -342,7 +592,7 @@ const Shop = () => {
 
             <input
               type="text"
-              placeholder="Search products..."
+              placeholder="Search healthy products..."
               value={searchTerm}
               onChange={(e) =>
                 setSearchTerm(e.target.value)
@@ -350,15 +600,21 @@ const Shop = () => {
               className="
               w-full
               h-16
-              rounded-2xl
-              bg-gray-50
+
+              rounded-3xl
+
+              bg-white/5
+
               border
-              border-gray-100
+              border-white/10
+
               pl-14
               pr-5
-              text-gray-700
-              font-semibold
+
+              text-white
+
               outline-none
+
               focus:ring-2
               focus:ring-green-400
               "
@@ -373,23 +629,27 @@ const Shop = () => {
           gap-4
           ">
 
-            {/* MOBILE FILTER */}
+            {/* FILTER */}
             <button
               onClick={() =>
                 setShowFilters(!showFilters)
               }
               className="
               lg:hidden
+
               h-14
               px-5
+
               rounded-2xl
-              bg-white
+
+              bg-white/5
+
               border
-              border-gray-200
+              border-white/10
+
               flex
               items-center
               gap-2
-              font-bold
               "
             >
 
@@ -408,11 +668,14 @@ const Shop = () => {
               className="
               h-14
               px-5
+
               rounded-2xl
-              bg-white
+
+              bg-white/5
+
               border
-              border-gray-200
-              font-bold
+              border-white/10
+
               outline-none
               "
             >
@@ -445,15 +708,19 @@ const Shop = () => {
                 className={`
                 w-14
                 h-14
+
                 rounded-2xl
+
                 flex
                 items-center
                 justify-center
+
                 transition-all
+
                 ${
                   gridCols === 2
                     ? 'bg-green-500 text-white shadow-lg'
-                    : 'bg-white border border-gray-200 text-gray-500'
+                    : 'bg-white/5 border border-white/10 text-gray-300'
                 }
                 `}
               >
@@ -469,15 +736,19 @@ const Shop = () => {
                 className={`
                 w-14
                 h-14
+
                 rounded-2xl
+
                 flex
                 items-center
                 justify-center
+
                 transition-all
+
                 ${
                   gridCols === 4
                     ? 'bg-green-500 text-white shadow-lg'
-                    : 'bg-white border border-gray-200 text-gray-500'
+                    : 'bg-white/5 border border-white/10 text-gray-300'
                 }
                 `}
               >
@@ -489,10 +760,10 @@ const Shop = () => {
           </div>
         </div>
 
-        {/* CONTENT */}
+        {/* MAIN */}
         <div className="
         grid
-        lg:grid-cols-[280px_1fr]
+        lg:grid-cols-[300px_1fr]
         gap-10
         ">
 
@@ -521,29 +792,26 @@ const Shop = () => {
                 sticky
                 top-28
 
-                bg-white/80
-                backdrop-blur-xl
+                bg-white/5
+                backdrop-blur-3xl
 
                 border
-                border-white/50
+                border-white/10
 
-                rounded-[36px]
+                rounded-[35px]
 
-                shadow-xl
-
-                p-6
+                p-8
                 ">
 
                   <h2 className="
-                  text-3xl
+                  text-4xl
                   font-black
-                  text-gray-900
                   mb-8
                   ">
                     Categories
                   </h2>
 
-                  <div className="space-y-3">
+                  <div className="space-y-4">
 
                     {categories.map(
                       (category) => (
@@ -551,7 +819,8 @@ const Shop = () => {
                         <motion.button
                           key={category}
                           whileHover={{
-                            scale: 1.03,
+                            scale: 1.04,
+                            x: 5,
                           }}
                           whileTap={{
                             scale: 0.97,
@@ -572,10 +841,10 @@ const Shop = () => {
                           w-full
                           text-left
 
-                          px-5
-                          py-4
+                          px-6
+                          py-5
 
-                          rounded-2xl
+                          rounded-3xl
 
                           font-black
 
@@ -584,8 +853,8 @@ const Shop = () => {
                           ${
                             selectedCategory ===
                             category
-                              ? 'bg-gradient-to-r from-green-500 to-lime-500 text-white shadow-lg'
-                              : 'bg-gray-50 hover:bg-green-50 text-gray-700'
+                              ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg'
+                              : 'bg-white/5 hover:bg-white/10 text-gray-200'
                           }
                           `}
                         >
@@ -595,6 +864,7 @@ const Shop = () => {
                         </motion.button>
                       )
                     )}
+
                   </div>
                 </div>
               </motion.div>
@@ -623,15 +893,23 @@ const Shop = () => {
                       layout
                       initial={{
                         opacity: 0,
-                        y: 40,
+                        y: 60,
+                        scale: 0.9,
                       }}
                       animate={{
                         opacity: 1,
                         y: 0,
+                        scale: 1,
                       }}
                       exit={{
                         opacity: 0,
-                        scale: 0.9,
+                        scale: 0.8,
+                      }}
+                      transition={{
+                        duration: 0.5,
+                      }}
+                      whileHover={{
+                        y: -15,
                       }}
                     >
 
@@ -642,6 +920,7 @@ const Shop = () => {
                     </motion.div>
                   )
                 )}
+
               </AnimatePresence>
             </motion.div>
 
@@ -651,7 +930,9 @@ const Shop = () => {
             items-center
             justify-center
             gap-3
-            mt-16
+
+            mt-20
+
             flex-wrap
             ">
 
@@ -664,24 +945,21 @@ const Shop = () => {
                 }
                 disabled={currentPage === 1}
                 className="
-                w-12
-                h-12
+                w-14
+                h-14
 
                 rounded-2xl
 
-                bg-white
+                bg-white/5
 
                 border
-                border-green-100
+                border-white/10
 
                 flex
                 items-center
                 justify-center
 
-                shadow-sm
-
                 hover:bg-green-500
-                hover:text-white
 
                 transition-all
 
@@ -689,11 +967,11 @@ const Shop = () => {
                 "
               >
 
-                <ChevronLeft size={18} />
+                <ChevronLeft size={20} />
 
               </button>
 
-              {/* PAGE NUMBERS */}
+              {/* NUMBERS */}
               {[...Array(totalPages)].map(
                 (_, index) => (
 
@@ -703,8 +981,8 @@ const Shop = () => {
                       setCurrentPage(index + 1)
                     }
                     className={`
-                    w-12
-                    h-12
+                    w-14
+                    h-14
 
                     rounded-2xl
 
@@ -716,7 +994,7 @@ const Shop = () => {
                       currentPage ===
                       index + 1
                         ? 'bg-green-500 text-white shadow-lg'
-                        : 'bg-white text-slate-700 border border-green-100 hover:bg-green-50'
+                        : 'bg-white/5 text-white border border-white/10 hover:bg-white/10'
                     }
                     `}
                   >
@@ -741,24 +1019,21 @@ const Shop = () => {
                   currentPage === totalPages
                 }
                 className="
-                w-12
-                h-12
+                w-14
+                h-14
 
                 rounded-2xl
 
-                bg-white
+                bg-white/5
 
                 border
-                border-green-100
+                border-white/10
 
                 flex
                 items-center
                 justify-center
 
-                shadow-sm
-
                 hover:bg-green-500
-                hover:text-white
 
                 transition-all
 
@@ -766,10 +1041,12 @@ const Shop = () => {
                 "
               >
 
-                <ChevronRight size={18} />
+                <ChevronRight size={20} />
 
               </button>
+
             </div>
+
           </div>
         </div>
       </section>

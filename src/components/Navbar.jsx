@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, {
+  useState,
+  useEffect,
+} from 'react';
 
 import {
   User,
@@ -7,9 +10,13 @@ import {
   Menu,
   X,
   ArrowRight,
+  Sparkles,
 } from 'lucide-react';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  motion,
+  AnimatePresence,
+} from 'framer-motion';
 
 import {
   Link,
@@ -31,287 +38,865 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] =
     useState(false);
 
+  const [isScrolled, setIsScrolled] =
+    useState(false);
+
   const location = useLocation();
 
   const navigate = useNavigate();
 
+  /* ================================================= */
+  /* SCROLL EFFECT */
+  /* ================================================= */
+
+  useEffect(() => {
+
+    const handleScroll = () => {
+
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener(
+      'scroll',
+      handleScroll
+    );
+
+    return () =>
+      window.removeEventListener(
+        'scroll',
+        handleScroll
+      );
+
+  }, []);
+
   const isActive = (path) =>
     location.pathname === path;
 
+  const navLinks = [
+    {
+      label: 'Home',
+      path: '/',
+    },
+    {
+      label: 'About',
+      path: '/about',
+    },
+    {
+      label: 'Shop',
+      path: '/shop',
+    },
+    {
+      label: 'Categories',
+      path: '/categories',
+    },
+    {
+      label: 'Contact',
+      path: '/contact',
+    },
+  ];
+
   return (
     <>
+      {/* ================================================= */}
       {/* NAVBAR */}
-      <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
+      {/* ================================================= */}
 
-        {/* MAIN NAVBAR */}
-        <div className="container mx-auto px-4 py-3">
+      <motion.header
+        initial={{
+          y: -100,
+        }}
+        animate={{
+          y: 0,
+        }}
+        transition={{
+          duration: 0.6,
+        }}
+        className={`
+        fixed
+        top-0
+        left-0
+        w-full
 
-          <div className="flex items-center justify-between gap-3">
+        z-[9999]
 
+        transition-all
+        duration-500
+
+        ${
+          isScrolled
+            ? `
+            bg-[#050816]/75
+            backdrop-blur-3xl
+
+            border-b
+            border-white/10
+
+            shadow-[0_10px_60px_rgba(0,0,0,0.45)]
+
+            py-2
+            `
+            : `
+            bg-transparent
+            py-4
+            `
+        }
+        `}
+      >
+
+        {/* GLOW */}
+        <div className="
+        absolute
+        inset-0
+
+        opacity-60
+
+        bg-[radial-gradient(circle_at_top_left,rgba(34,197,94,0.12),transparent_30%)]
+
+        pointer-events-none
+        " />
+
+        <div className="
+        container
+        mx-auto
+        px-4
+        relative
+        z-20
+        ">
+
+          <div className="
+          flex
+          items-center
+          justify-between
+          gap-5
+          ">
+
+            {/* ================================================= */}
             {/* LEFT */}
-            <div className="flex items-center gap-3">
+            {/* ================================================= */}
+
+            <div className="
+            flex
+            items-center
+            gap-3
+            ">
 
               {/* MOBILE MENU */}
-              <button
-                className="lg:hidden p-2 hover:bg-gray-100 rounded-xl transition-all shrink-0"
+              <motion.button
+                whileTap={{
+                  scale: 0.9,
+                }}
+                whileHover={{
+                  rotate: 10,
+                }}
+                className="
+                lg:hidden
+
+                w-11
+                h-11
+
+                rounded-2xl
+
+                bg-white/5
+                backdrop-blur-2xl
+
+                border
+                border-white/10
+
+                text-white
+
+                flex
+                items-center
+                justify-center
+
+                transition-all
+                "
                 onClick={() =>
                   setIsMenuOpen(true)
                 }
               >
 
-                <Menu size={24} />
+                <Menu size={22} />
 
-              </button>
+              </motion.button>
 
               {/* LOGO */}
               <Link
                 to="/"
-                className="flex items-center gap-2 min-w-0"
+                className="
+                flex
+                items-center
+                gap-3
+                "
               >
 
-                <img
-                  src="/assets/logo.png"
+                <motion.img
+                  whileHover={{
+                    rotate: -5,
+                    scale: 1.05,
+                  }}
+                  src="/assets/logo.svg"
                   alt="Organic"
-                  className="h-9 w-auto object-contain shrink-0"
+                  className="
+                  h-10
+                  sm:h-12
+                  w-auto
+                  object-contain
+                  "
                 />
 
-                
+                <div className="
+                hidden
+                sm:block
+                ">
+
+                  
+
+                </div>
+
               </Link>
+
             </div>
 
+            {/* ================================================= */}
             {/* CENTER NAV */}
-            <nav className="hidden lg:flex justify-center flex-1">
+            {/* ================================================= */}
 
-              <ul className="flex items-center gap-10 text-sm font-bold uppercase tracking-wider">
+            <nav className="
+            hidden
+            lg:flex
+            ">
 
-                <li>
+              <div className="
+              flex
+              items-center
+              gap-3
+
+              bg-white/5
+              backdrop-blur-3xl
+
+              border
+              border-white/10
+
+              rounded-full
+
+              px-4
+              py-3
+
+              shadow-[0_10px_50px_rgba(0,0,0,0.35)]
+              ">
+
+                {navLinks.map((item, index) => (
+
                   <Link
-                    to="/"
-                    className={`transition-all duration-300 pb-1 border-b-2 ${
-                      isActive('/')
-                        ? 'text-green-600 border-green-600'
-                        : 'text-gray-700 border-transparent hover:text-green-600'
-                    }`}
+                    key={index}
+                    to={item.path}
+                    className="
+                    relative
+                    "
                   >
-                    Home
-                  </Link>
-                </li>
 
-                <li>
-                  <Link
-                    to="/about"
-                    className={`transition-all duration-300 pb-1 border-b-2 ${
-                      isActive('/about')
-                        ? 'text-green-600 border-green-600'
-                        : 'text-gray-700 border-transparent hover:text-green-600'
-                    }`}
-                  >
-                    About
-                  </Link>
-                </li>
+                    <motion.div
+                      whileHover={{
+                        y: -2,
+                      }}
+                      className={`
+                      relative
 
-                <li>
-                  <Link
-                    to="/shop"
-                    className={`transition-all duration-300 pb-1 border-b-2 ${
-                      isActive('/shop')
-                        ? 'text-green-600 border-green-600'
-                        : 'text-gray-700 border-transparent hover:text-green-600'
-                    }`}
-                  >
-                    Shop
-                  </Link>
-                </li>
+                      px-5
+                      py-3
 
-                <li>
-                  <Link
-                    to="/categories"
-                    className={`transition-all duration-300 pb-1 border-b-2 ${
-                      isActive('/categories')
-                        ? 'text-green-600 border-green-600'
-                        : 'text-gray-700 border-transparent hover:text-green-600'
-                    }`}
-                  >
-                    Categories
-                  </Link>
-                </li>
+                      rounded-full
 
-                <li>
-                  <Link
-                    to="/contact"
-                    className={`transition-all duration-300 pb-1 border-b-2 ${
-                      isActive('/contact')
-                        ? 'text-green-600 border-green-600'
-                        : 'text-gray-700 border-transparent hover:text-green-600'
-                    }`}
-                  >
-                    Contact
+                      text-sm
+                      font-black
+
+                      uppercase
+                      tracking-[0.15em]
+
+                      transition-all
+                      duration-300
+
+                      overflow-hidden
+
+                      ${
+                        isActive(item.path)
+                          ? `
+                          text-white
+                          `
+                          : `
+                          text-gray-300
+                          hover:text-white
+                          `
+                      }
+                      `}
+                    >
+
+                      {/* ACTIVE BG */}
+                      {isActive(item.path) && (
+
+                        <motion.div
+                          layoutId="navbar-pill"
+                          transition={{
+                            type: 'spring',
+                            bounce: 0.25,
+                            duration: 0.6,
+                          }}
+                          className="
+                          absolute
+                          inset-0
+
+                          rounded-full
+
+                          bg-gradient-to-r
+                          from-green-500
+                          to-emerald-600
+
+                          shadow-[0_10px_40px_rgba(34,197,94,0.4)]
+                          "
+                        />
+
+                      )}
+
+                      {/* HOVER LIGHT */}
+                      <div className="
+                      absolute
+                      inset-0
+
+                      opacity-0
+                      hover:opacity-100
+
+                      transition-all
+                      duration-500
+
+                      bg-white/5
+                      rounded-full
+                      " />
+
+                      <span className="
+                      relative
+                      z-20
+                      ">
+
+                        {item.label}
+
+                      </span>
+
+                    </motion.div>
+
                   </Link>
-                </li>
-              </ul>
+                ))}
+
+              </div>
+
             </nav>
 
+            {/* ================================================= */}
             {/* RIGHT */}
-            <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+            {/* ================================================= */}
+
+            <div className="
+            flex
+            items-center
+            gap-3
+            ">
 
               {/* LOGIN */}
-              <Link
-                to="/login"
-                className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-full transition-all text-gray-700"
+              <motion.div
+                whileHover={{
+                  y: -3,
+                  rotate: -5,
+                }}
+                whileTap={{
+                  scale: 0.9,
+                }}
               >
 
-                <User size={20} />
+                <Link
+                  to="/login"
+                  className="
+                  w-12
+                  h-12
 
-              </Link>
+                  rounded-2xl
+
+                  bg-white/5
+                  backdrop-blur-2xl
+
+                  border
+                  border-white/10
+
+                  text-white
+
+                  flex
+                  items-center
+                  justify-center
+
+                  hover:bg-green-500
+
+                  transition-all
+                  duration-300
+                  "
+                >
+
+                  <User size={20} />
+
+                </Link>
+
+              </motion.div>
 
               {/* WISHLIST */}
-              <Link
-                to="/wishlist"
-                className="w-10 h-10 flex items-center justify-center hover:bg-pink-50 rounded-full transition-all text-gray-700 relative"
+              <motion.div
+                whileHover={{
+                  y: -3,
+                  rotate: 5,
+                }}
+                whileTap={{
+                  scale: 0.9,
+                }}
               >
 
-                <Heart size={20} />
+                <Link
+                  to="/wishlist"
+                  className="
+                  relative
 
-                <span className="absolute top-0 right-0 w-5 h-5 bg-pink-500 text-white text-[10px] flex items-center justify-center rounded-full font-bold">
-                  {likedItems.length}
-                </span>
-              </Link>
+                  w-12
+                  h-12
+
+                  rounded-2xl
+
+                  bg-white/5
+                  backdrop-blur-2xl
+
+                  border
+                  border-white/10
+
+                  text-white
+
+                  flex
+                  items-center
+                  justify-center
+
+                  hover:bg-pink-500
+
+                  transition-all
+                  duration-300
+                  "
+                >
+
+                  <Heart size={20} />
+
+                  <span className="
+                  absolute
+                  -top-1
+                  -right-1
+
+                  w-5
+                  h-5
+
+                  rounded-full
+
+                  bg-pink-500
+
+                  text-white
+                  text-[10px]
+                  font-black
+
+                  flex
+                  items-center
+                  justify-center
+                  ">
+
+                    {likedItems.length}
+
+                  </span>
+
+                </Link>
+
+              </motion.div>
 
               {/* CART */}
-              <Link
-                to="/cart"
-                className="w-10 h-10 sm:w-11 sm:h-11 bg-green-100 hover:bg-green-200 rounded-full transition-all text-green-700 relative flex items-center justify-center"
+              <motion.div
+                whileHover={{
+                  y: -3,
+                  scale: 1.03,
+                }}
+                whileTap={{
+                  scale: 0.9,
+                }}
               >
 
-                <ShoppingBag size={20} />
+                <Link
+                  to="/cart"
+                  className="
+                  relative
 
-                <span className="absolute top-0 right-0 w-5 h-5 bg-green-600 text-white text-[10px] flex items-center justify-center rounded-full font-bold">
-                  {getCartCount()}
-                </span>
-              </Link>
+                  h-12
+
+                  px-5
+
+                  rounded-2xl
+
+                  bg-gradient-to-r
+                  from-green-500
+                  to-emerald-600
+
+                  text-white
+
+                  flex
+                  items-center
+                  gap-3
+
+                  shadow-[0_10px_40px_rgba(34,197,94,0.4)]
+
+                  transition-all
+                  duration-300
+                  "
+                >
+
+                  <ShoppingBag size={20} />
+
+                  <span className="
+                  hidden
+                  sm:block
+
+                  text-sm
+                  font-black
+
+                  uppercase
+                  tracking-[0.15em]
+                  ">
+
+                    Cart
+
+                  </span>
+
+                  <span className="
+                  w-6
+                  h-6
+
+                  rounded-full
+
+                  bg-white
+                  text-green-600
+
+                  text-[11px]
+                  font-black
+
+                  flex
+                  items-center
+                  justify-center
+                  ">
+
+                    {getCartCount()}
+
+                  </span>
+
+                </Link>
+
+              </motion.div>
+
             </div>
+
           </div>
+
         </div>
 
-        {/* MOBILE MENU */}
-        <AnimatePresence>
+      </motion.header>
 
-          {isMenuOpen && (
-            <>
-              {/* OVERLAY */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() =>
-                  setIsMenuOpen(false)
-                }
-                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999]"
-              />
+      {/* ================================================= */}
+      {/* MOBILE MENU */}
+      {/* ================================================= */}
 
-              {/* SIDEBAR */}
-              <motion.div
-                initial={{ x: '-100%' }}
-                animate={{ x: 0 }}
-                exit={{ x: '-100%' }}
-                transition={{
-                  type: 'spring',
-                  damping: 25,
-                }}
-                className="fixed top-0 left-0 bottom-0 w-[85%] max-w-[320px] bg-white z-[99999] shadow-[0_20px_60px_rgba(0,0,0,0.25)] p-6 flex flex-col border-r border-gray-200"
-              >
+      <AnimatePresence>
 
-                {/* TOP */}
-                <div className="flex items-center justify-between mb-10">
+        {isMenuOpen && (
+          <>
+            {/* OVERLAY */}
+            <motion.div
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+              }}
+              onClick={() =>
+                setIsMenuOpen(false)
+              }
+              className="
+              fixed
+              inset-0
+
+              bg-black/70
+              backdrop-blur-sm
+
+              z-[99998]
+              "
+            />
+
+            {/* SIDEBAR */}
+            <motion.div
+              initial={{
+                x: '-100%',
+              }}
+              animate={{
+                x: 0,
+              }}
+              exit={{
+                x: '-100%',
+              }}
+              transition={{
+                type: 'spring',
+                damping: 25,
+              }}
+              className="
+              fixed
+              top-0
+              left-0
+              bottom-0
+
+              w-[85%]
+              max-w-[340px]
+
+              bg-[#050816]/95
+              backdrop-blur-3xl
+
+              border-r
+              border-white/10
+
+              z-[99999]
+
+              shadow-[0_20px_80px_rgba(0,0,0,0.6)]
+
+              p-6
+
+              flex
+              flex-col
+              "
+            >
+
+              {/* TOP */}
+              <div className="
+              flex
+              items-center
+              justify-between
+
+              mb-12
+              ">
+
+                <div className="
+                flex
+                items-center
+                gap-3
+                ">
 
                   <img
-                    src="/assets/logo.png"
+                    src="/assets/logo.svg"
                     alt="Logo"
                     className="h-10"
                   />
 
-                  <button
-                    onClick={() =>
-                      setIsMenuOpen(false)
-                    }
-                    className="p-2 hover:bg-gray-100 rounded-xl"
-                  >
+                  <div>
 
-                    <X size={24} />
+                    <h2 className="
+                    text-2xl
+                    font-black
+                    text-white
+                    ">
 
-                  </button>
+                      Organic
+
+                    </h2>
+
+                    <p className="
+                    text-[10px]
+
+                    uppercase
+                    tracking-[0.3em]
+
+                    text-green-300
+
+                    font-black
+                    ">
+
+                      Healthy Store
+                    </p>
+
+                  </div>
+
                 </div>
 
-                {/* MOBILE LINKS */}
-                <ul className="space-y-5">
+                <button
+                  onClick={() =>
+                    setIsMenuOpen(false)
+                  }
+                  className="
+                  w-11
+                  h-11
 
-                  <li>
+                  rounded-2xl
+
+                  bg-white/5
+
+                  border
+                  border-white/10
+
+                  text-white
+
+                  flex
+                  items-center
+                  justify-center
+                  "
+                >
+
+                  <X size={22} />
+
+                </button>
+
+              </div>
+
+              {/* LINKS */}
+              <ul className="
+              space-y-5
+              ">
+
+                {navLinks.map((item, index) => (
+
+                  <motion.li
+                    key={index}
+                    initial={{
+                      opacity: 0,
+                      x: -30,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      x: 0,
+                    }}
+                    transition={{
+                      delay: index * 0.08,
+                    }}
+                  >
+
                     <Link
-                      to="/"
+                      to={item.path}
                       onClick={() =>
                         setIsMenuOpen(false)
                       }
-                      className="text-lg font-bold hover:text-green-600 block"
-                    >
-                      Home
-                    </Link>
-                  </li>
+                      className={`
+                      flex
+                      items-center
+                      justify-between
 
-                  <li>
-                    <Link
-                      to="/about"
-                      onClick={() =>
-                        setIsMenuOpen(false)
+                      px-5
+                      py-4
+
+                      rounded-2xl
+
+                      text-lg
+                      font-black
+
+                      transition-all
+                      duration-300
+
+                      ${
+                        isActive(item.path)
+                          ? `
+                          bg-gradient-to-r
+                          from-green-500
+                          to-emerald-600
+
+                          text-white
+                          `
+                          : `
+                          bg-white/5
+                          text-gray-300
+
+                          hover:bg-white/10
+                          hover:text-white
+                          `
                       }
-                      className="text-lg font-bold hover:text-green-600 block"
+                      `}
                     >
-                      About
-                    </Link>
-                  </li>
 
-                  <li>
-                    <Link
-                      to="/shop"
-                      onClick={() =>
-                        setIsMenuOpen(false)
-                      }
-                      className="text-lg font-bold hover:text-green-600 block"
-                    >
-                      Shop
-                    </Link>
-                  </li>
+                      {item.label}
 
-                  <li>
-                    <Link
-                      to="/categories"
-                      onClick={() =>
-                        setIsMenuOpen(false)
-                      }
-                      className="text-lg font-bold hover:text-green-600 block"
-                    >
-                      Categories
-                    </Link>
-                  </li>
+                      <ArrowRight size={18} />
 
-                  <li>
-                    <Link
-                      to="/contact"
-                      onClick={() =>
-                        setIsMenuOpen(false)
-                      }
-                      className="text-lg font-bold hover:text-green-600 block"
-                    >
-                      Contact
                     </Link>
-                  </li>
-                </ul>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
-      </header>
 
-      {/* FLOATING CART BUTTON */}
+                  </motion.li>
+                ))}
+
+              </ul>
+
+              {/* BOTTOM */}
+              <div className="
+              mt-auto
+
+              bg-white/5
+              backdrop-blur-2xl
+
+              border
+              border-white/10
+
+              rounded-[30px]
+
+              p-6
+              ">
+
+                <div className="
+                flex
+                items-center
+                gap-3
+
+                mb-4
+                ">
+
+                  <Sparkles
+                    size={18}
+                    className="text-green-400"
+                  />
+
+                  <p className="
+                  text-sm
+                  font-black
+
+                  uppercase
+                  tracking-[0.2em]
+
+                  text-green-300
+                  ">
+
+                    Premium Organic
+                  </p>
+
+                </div>
+
+                <h3 className="
+                text-2xl
+                font-black
+                text-white
+                leading-tight
+                ">
+
+                  Healthy Shopping Experience
+
+                </h3>
+
+              </div>
+
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* ================================================= */}
+      {/* FLOATING CART */}
+      {/* ================================================= */}
+
       <AnimatePresence>
 
         {cartItems.length > 0 && (
@@ -338,23 +923,76 @@ const Navbar = () => {
             onClick={() =>
               navigate('/cart')
             }
-            className="fixed bottom-5 right-5 z-[99999] bg-gradient-to-r from-green-500 to-lime-500 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 font-black hover:scale-105 transition-all"
+            className="
+            fixed
+            bottom-5
+            right-5
+
+            z-[99999]
+
+            bg-gradient-to-r
+            from-green-500
+            to-emerald-600
+
+            text-white
+
+            px-6
+            py-4
+
+            rounded-2xl
+
+            shadow-[0_20px_60px_rgba(34,197,94,0.45)]
+
+            flex
+            items-center
+            gap-4
+
+            font-black
+
+            hover:scale-105
+
+            transition-all
+            duration-300
+            "
           >
 
             <ShoppingBag size={20} />
 
-            <span className="hidden sm:block">
+            <span className="
+            hidden
+            sm:block
+
+            uppercase
+            tracking-[0.15em]
+            text-sm
+            ">
+
               Continue To Cart
+
             </span>
 
-            <span className="bg-white text-green-600 px-2 py-1 rounded-lg text-xs">
+            <span className="
+            bg-white
+            text-green-600
+
+            px-3
+            py-1
+
+            rounded-xl
+
+            text-xs
+            font-black
+            ">
+
               {getCartCount()}
+
             </span>
 
             <ArrowRight size={18} />
 
           </motion.button>
         )}
+
       </AnimatePresence>
     </>
   );

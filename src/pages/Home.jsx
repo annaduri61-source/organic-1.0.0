@@ -9,17 +9,11 @@ import Newsletter from '../components/Newsletter';
 
 import { motion } from 'framer-motion';
 
-import {
-  Minus,
-  Plus,
-  ShoppingBag
-} from 'lucide-react';
-
 const Home = () => {
 
-  /* ─────────────────────────────────────────────
-      LIVE COUNTDOWN TIMER
-  ───────────────────────────────────────────── */
+  /* ================================================= */
+  /* LIVE COUNTDOWN */
+  /* ================================================= */
 
   const [timeLeft, setTimeLeft] = useState({
     days: 2,
@@ -34,7 +28,12 @@ const Home = () => {
 
       setTimeLeft((prev) => {
 
-        let { days, hours, minutes, seconds } = prev;
+        let {
+          days,
+          hours,
+          minutes,
+          seconds,
+        } = prev;
 
         if (seconds > 0) {
 
@@ -82,208 +81,467 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <div className="
+    bg-[#050816]
+    overflow-hidden
+    text-white
+    ">
+
+      {/* ================================================= */}
+      {/* HERO */}
+      {/* ================================================= */}
+
       <Hero />
+
+      {/* ================================================= */}
+      {/* FEATURES */}
+      {/* ================================================= */}
 
       <Features />
 
-      {/* ─────────────────────────────────────────────
-          DEAL OF THE DAY SECTION
-      ───────────────────────────────────────────── */}
+      {/* ================================================= */}
+      {/* DEAL OF THE DAY */}
+      {/* ================================================= */}
 
-      <section className="py-20 bg-accent/5 overflow-hidden">
+      <section className="
+      relative
+      py-28
 
-        <div className="container mx-auto px-4">
+      bg-[#050816]
 
-          <div className="bg-white rounded-[60px] p-8 lg:p-20 border border-accent/10 shadow-2xl shadow-accent/5 flex flex-col lg:flex-row items-center gap-16 relative">
+      overflow-hidden
+      ">
 
-            {/* Deal Badge */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[65%] bg-white px-3 rounded-3xl z-30">
+        {/* BACKGROUND */}
+        <div className="absolute inset-0 overflow-hidden">
 
-              <div className="bg-accent text-black px-8 py-3 rounded-2xl font-black uppercase tracking-[0.3em] text-sm shadow-xl shadow-accent/30">
-                Deal of the Day
-              </div>
+          {/* GRID */}
+          <div className="
+          absolute
+          inset-0
+          opacity-[0.05]
+
+          bg-[linear-gradient(rgba(255,255,255,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.15)_1px,transparent_1px)]
+
+          bg-[size:80px_80px]
+          " />
+
+          {/* GLOW */}
+          <motion.div
+            animate={{
+              x: [0, 100, 0],
+              y: [0, -50, 0],
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+            }}
+            className="
+            absolute
+            top-0
+            left-0
+
+            w-[500px]
+            h-[500px]
+
+            bg-green-500/20
+            blur-[180px]
+            "
+          />
+
+          <motion.div
+            animate={{
+              x: [0, -100, 0],
+              y: [0, 50, 0],
+            }}
+            transition={{
+              duration: 14,
+              repeat: Infinity,
+            }}
+            className="
+            absolute
+            bottom-0
+            right-0
+
+            w-[500px]
+            h-[500px]
+
+            bg-emerald-500/20
+            blur-[180px]
+            "
+          />
+
+        </div>
+
+        <div className="
+        container
+        mx-auto
+        px-4
+        relative
+        z-20
+        ">
+
+          <div className="
+          relative
+
+          bg-white/5
+          backdrop-blur-3xl
+
+          border
+          border-white/10
+
+          rounded-[50px]
+
+          p-8
+          lg:p-16
+
+          overflow-hidden
+
+          shadow-[0_20px_120px_rgba(0,0,0,0.45)]
+          ">
+
+            {/* BADGE */}
+            <div className="
+            absolute
+            top-8
+            left-8
+
+            bg-gradient-to-r
+            from-green-500
+            to-emerald-600
+
+            px-6
+            py-3
+
+            rounded-full
+
+            text-white
+            font-black
+
+            uppercase
+            tracking-[0.3em]
+
+            text-xs
+
+            shadow-[0_15px_40px_rgba(34,197,94,0.4)]
+            ">
+
+              Deal of the Day
 
             </div>
 
-            {/* ───────────────── LEFT CONTENT ───────────────── */}
+            <div className="
+            grid
+            lg:grid-cols-2
+            gap-20
+            items-center
+            ">
 
-            <div className="lg:w-1/2 space-y-8 text-center lg:text-left">
+              {/* LEFT */}
+              <div className="
+              text-center
+              lg:text-left
+              ">
 
-              <h2 className="text-4xl lg:text-6xl font-black text-gray-900 leading-tight">
+                <h2 className="
+                text-5xl
+                lg:text-7xl
 
-                Fresh Organic
+                font-black
 
-                <span className="text-accent">
-                  {' '}Strawberries
-                </span>
+                leading-[0.95]
 
-              </h2>
+                text-white
 
-              <p className="text-gray-500 text-lg font-medium">
+                mt-12
+                ">
 
-                Hand-picked this morning from our local organic farm.
-                Rich in antioxidants and bursting with natural sweetness.
+                  Fresh Organic
 
-              </p>
-
-              {/* TIMER */}
-              <div className="flex flex-wrap justify-center lg:justify-start gap-6">
-
-                {[
-                  {
-                    label: 'Days',
-                    value: String(timeLeft.days).padStart(2, '0')
-                  },
-
-                  {
-                    label: 'Hours',
-                    value: String(timeLeft.hours).padStart(2, '0')
-                  },
-
-                  {
-                    label: 'Mins',
-                    value: String(timeLeft.minutes).padStart(2, '0')
-                  },
-
-                  {
-                    label: 'Secs',
-                    value: String(timeLeft.seconds).padStart(2, '0')
-                  }
-
-                ].map((time, i) => (
-
-                  <div
-                    key={i}
-                    className="flex flex-col items-center bg-gray-50 w-20 h-24 justify-center rounded-[24px] border border-gray-100 shadow-sm"
-                  >
-
-                    <span className="text-3xl font-black text-gray-900">
-                      {time.value}
-                    </span>
-
-                    <span className="text-[10px] font-bold text-accent uppercase tracking-widest">
-                      {time.label}
-                    </span>
-
-                  </div>
-                ))}
-              </div>
-
-              {/* PRICE */}
-              <div className="flex items-center justify-center lg:justify-start gap-4 flex-wrap">
-
-                <span className="text-4xl font-black text-gray-900">
-                  ₹149.00
-                </span>
-
-                <del className="text-xl text-gray-300 font-bold">
-                  ₹249.00
-                </del>
-
-                <span className="bg-green-100 text-green-600 px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest">
-                  Save 40%
-                </span>
-
-              </div>
-
-              {/* CART CONTROLS */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6">
-
-                {/* Quantity */}
-                <div className="flex items-center bg-white border border-gray-100 rounded-[24px] p-2 gap-6 shadow-sm">
-
-                  <button className="w-12 h-12 flex items-center justify-center text-gray-400 hover:bg-gray-50 hover:text-primary hover:shadow-md rounded-2xl transition-all">
-
-                    <Minus size={20} />
-
-                  </button>
-
-                  <span className="text-2xl font-black w-8 text-center text-gray-900">
-                    1
+                  <span className="
+                  block
+                  text-green-400
+                  italic
+                  ">
+                    Strawberries
                   </span>
 
-                  <button className="w-12 h-12 flex items-center justify-center text-gray-400 hover:bg-gray-50 hover:text-primary hover:shadow-md rounded-2xl transition-all">
+                </h2>
 
-                    <Plus size={20} />
+                <p className="
+                text-gray-300
+                text-xl
+                leading-relaxed
 
-                  </button>
+                mt-8
+                max-w-2xl
+                ">
+
+                  Hand-picked fresh from our organic farms.
+                  Rich in antioxidants, natural sweetness
+                  and premium healthy nutrition.
+
+                </p>
+
+                {/* TIMER */}
+                <div className="
+                flex
+                flex-wrap
+                justify-center
+                lg:justify-start
+
+                gap-5
+
+                mt-10
+                ">
+
+                  {[
+                    {
+                      label: 'Days',
+                      value: String(timeLeft.days).padStart(2, '0')
+                    },
+                    {
+                      label: 'Hours',
+                      value: String(timeLeft.hours).padStart(2, '0')
+                    },
+                    {
+                      label: 'Mins',
+                      value: String(timeLeft.minutes).padStart(2, '0')
+                    },
+                    {
+                      label: 'Secs',
+                      value: String(timeLeft.seconds).padStart(2, '0')
+                    }
+                  ].map((time, i) => (
+
+                    <motion.div
+                      key={i}
+                      whileHover={{
+                        y: -8,
+                        scale: 1.03,
+                      }}
+                      className="
+                      w-24
+                      h-28
+
+                      rounded-[28px]
+
+                      bg-white/5
+                      backdrop-blur-3xl
+
+                      border
+                      border-white/10
+
+                      flex
+                      flex-col
+                      items-center
+                      justify-center
+
+                      shadow-[0_15px_50px_rgba(0,0,0,0.35)]
+                      "
+                    >
+
+                      <span className="
+                      text-4xl
+                      font-black
+                      text-white
+                      ">
+
+                        {time.value}
+
+                      </span>
+
+                      <span className="
+                      text-[11px]
+
+                      uppercase
+                      tracking-[0.3em]
+
+                      text-green-300
+
+                      font-black
+
+                      mt-2
+                      ">
+
+                        {time.label}
+
+                      </span>
+
+                    </motion.div>
+                  ))}
 
                 </div>
 
-                {/* Add To Cart */}
-                <button className="flex-grow max-w-[250px] bg-yellow-400 text-gray-900 font-black py-5 rounded-[24px] shadow-2xl shadow-yellow-400/20 hover:bg-yellow-500 hover:scale-[1.05] hover:shadow-yellow-400/40 active:scale-[0.98] transition-all flex items-center justify-center gap-4 text-lg">
+                {/* PRICE */}
+                <div className="
+                flex
+                items-center
+                justify-center
+                lg:justify-start
 
-                  <ShoppingBag size={24} />
+                gap-5
 
-                  Add to Cart
+                mt-10
+                flex-wrap
+                ">
 
-                </button>
+                  <span className="
+                  text-5xl
+                  font-black
+                  text-green-400
+                  ">
+
+                    ₹149
+
+                  </span>
+
+                  <del className="
+                  text-2xl
+                  text-gray-500
+                  font-bold
+                  ">
+
+                    ₹249
+
+                  </del>
+
+                  <span className="
+                  px-5
+                  py-2
+
+                  rounded-full
+
+                  bg-green-500/10
+
+                  border
+                  border-green-500/20
+
+                  text-green-300
+
+                  text-xs
+                  font-black
+
+                  uppercase
+                  tracking-[0.25em]
+                  ">
+
+                    Save 40%
+
+                  </span>
+
+                </div>
 
               </div>
-            </div>
 
-            {/* ───────────────── RIGHT IMAGE ───────────────── */}
+              {/* RIGHT */}
+              <div className="
+              relative
+              flex
+              items-center
+              justify-center
+              ">
 
-            <div className="lg:w-1/2 relative flex items-center justify-center">
+                {/* GLOW */}
+                <div className="
+                absolute
+                inset-0
 
-              {/* Glow */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-accent/10 rounded-full blur-[100px] -z-10" />
+                bg-green-500/20
+                blur-[120px]
+                rounded-full
+                " />
 
-              {/* Floating Top Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="absolute top-5 left-0 bg-white/80 backdrop-blur-xl shadow-xl border border-white/40 rounded-[24px] px-5 py-4 z-30"
-              >
+                {/* IMAGE */}
+                <motion.div
+                  animate={{
+                    y: [0, -20, 0],
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                  }}
+                  className="
+                  relative
+                  z-20
+                  "
+                >
 
-                <p className="text-xs font-bold uppercase tracking-[0.25em] text-gray-400">
-                  Organic Quality
-                </p>
+                  <img
+src="/assets/strawberry.png"
+                    alt="Strawberry"
+                    className="
+                    w-full
+                    max-w-[520px]
 
-                <h4 className="text-lg font-black text-gray-900">
-                  100% Fresh
-                </h4>
+                    rounded-[40px]
 
-              </motion.div>
+                    border
+                    border-white/10
 
-              {/* Floating Bottom Badge */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1 }}
-                className="absolute bottom-10 right-0 bg-white/80 backdrop-blur-xl shadow-xl border border-white/40 rounded-[24px] px-5 py-4 z-30"
-              >
+                    shadow-[0_30px_120px_rgba(0,0,0,0.6)]
+                    "
+                  />
 
-                <p className="text-xs font-bold uppercase tracking-[0.25em] text-gray-400">
-                  Fast Delivery
-                </p>
+                </motion.div>
 
-                <h4 className="text-lg font-black text-accent">
-                  10 Min Delivery
-                </h4>
+                {/* FLOAT CARD */}
+                <motion.div
+                  animate={{
+                    y: [0, 15, 0],
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                  }}
+                  className="
+                  absolute
+                  bottom-0
+                  -right-4
 
-              </motion.div>
+                  bg-white/5
+                  backdrop-blur-3xl
 
-              {/* Strawberry Animation */}
-              <motion.div
-                animate={{ y: [0, -20, 0] }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="relative z-10"
-              >
+                  border
+                  border-white/10
 
-                <img
-                  src="/assets/strawberry.png"
-                  alt="Strawberry"
-                  className="w-full max-w-[500px] h-auto drop-shadow-[0_35px_35px_rgba(255,87,87,0.3)]"
-                />
+                  rounded-[30px]
 
-              </motion.div>
+                  p-6
+
+                  shadow-[0_20px_80px_rgba(0,0,0,0.45)]
+                  "
+                >
+
+                  <p className="
+                  text-green-300
+                  text-xs
+
+                  uppercase
+                  tracking-[0.3em]
+
+                  font-black
+
+                  mb-3
+                  ">
+
+                    Premium Organic
+
+                  </p>
+
+                  <h3 className="
+                  text-3xl
+                  font-black
+                  text-white
+                  ">
+
+                    100% Fresh
+
+                  </h3>
+
+                </motion.div>
+
+              </div>
 
             </div>
 
@@ -293,6 +551,10 @@ const Home = () => {
 
       </section>
 
+      {/* ================================================= */}
+      {/* OTHER SECTIONS */}
+      {/* ================================================= */}
+
       <CategoryCarousel />
 
       <ProductGrid />
@@ -300,7 +562,8 @@ const Home = () => {
       <Testimonials />
 
       <Newsletter />
-    </>
+
+    </div>
   );
 };
 
