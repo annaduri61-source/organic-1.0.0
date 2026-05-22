@@ -234,7 +234,7 @@ const Navbar = () => {
                     rotate: -5,
                     scale: 1.05,
                   }}
-                  src="/assets/logo.svg"
+                  src="/assets/logo.png"
                   alt="Organic"
                   className="
                   h-10
@@ -588,7 +588,7 @@ const Navbar = () => {
                   justify-center
                   ">
 
-                    {getCartCount()}
+                    {getCartCount}
 
                   </span>
 
@@ -984,7 +984,7 @@ const Navbar = () => {
             font-black
             ">
 
-              {getCartCount()}
+              {getCartCount}
 
             </span>
 

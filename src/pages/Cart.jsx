@@ -26,11 +26,14 @@ const Cart = () => {
     getCartTotal,
   } = useCart();
 
+  /* ======================================= */
   /* EMPTY CART */
+  /* ======================================= */
 
   if (cartItems.length === 0) {
 
     return (
+
       <div className="
       min-h-screen
       bg-[#050816]
@@ -46,25 +49,15 @@ const Cart = () => {
         <div className="absolute inset-0">
 
           <div className="
-          absolute
-          top-0
-          left-0
-
-          w-[500px]
-          h-[500px]
-
+          absolute top-0 left-0
+          w-[500px] h-[500px]
           bg-green-500/20
           blur-[160px]
           " />
 
           <div className="
-          absolute
-          bottom-0
-          right-0
-
-          w-[500px]
-          h-[500px]
-
+          absolute bottom-0 right-0
+          w-[500px] h-[500px]
           bg-emerald-500/20
           blur-[160px]
           " />
@@ -81,8 +74,7 @@ const Cart = () => {
             y: 0,
           }}
           className="
-          relative
-          z-20
+          relative z-20
 
           max-w-xl
           w-full
@@ -96,26 +88,20 @@ const Cart = () => {
           rounded-[40px]
 
           p-10
-
           text-center
-
-          shadow-[0_30px_120px_rgba(0,0,0,0.5)]
           "
         >
 
-          {/* ICON */}
           <motion.div
             animate={{
               y: [0, -15, 0],
-              rotate: [0, 5, -5, 0],
             }}
             transition={{
               duration: 5,
               repeat: Infinity,
             }}
             className="
-            w-32
-            h-32
+            w-32 h-32
 
             rounded-[35px]
 
@@ -129,8 +115,6 @@ const Cart = () => {
 
             mx-auto
             mb-8
-
-            shadow-[0_20px_80px_rgba(34,197,94,0.5)]
             "
           >
 
@@ -155,12 +139,10 @@ const Cart = () => {
           <p className="
           text-gray-400
           text-lg
-          leading-relaxed
           mb-10
           ">
 
             Your premium organic collection is waiting.
-            Start exploring healthy products now.
 
           </p>
 
@@ -182,13 +164,6 @@ const Cart = () => {
             py-5
 
             rounded-3xl
-
-            shadow-[0_20px_60px_rgba(34,197,94,0.4)]
-
-            hover:scale-105
-
-            transition-all
-            duration-300
             "
           >
 
@@ -204,6 +179,7 @@ const Cart = () => {
   }
 
   return (
+
     <div className="
     min-h-screen
     bg-[#050816]
@@ -215,161 +191,72 @@ const Cart = () => {
     py-10
     ">
 
-      {/* ================================================= */}
-      {/* BACKGROUND */}
-      {/* ================================================= */}
-
-      <div className="absolute inset-0 overflow-hidden">
-
-        {/* GRID */}
-        <div className="
-        absolute
-        inset-0
-        opacity-[0.06]
-
-        bg-[linear-gradient(rgba(255,255,255,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.15)_1px,transparent_1px)]
-
-        bg-[size:80px_80px]
-        " />
-
-        {/* GLOW */}
-        <motion.div
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-          }}
-          className="
-          absolute
-          top-0
-          left-0
-
-          w-[500px]
-          h-[500px]
-
-          bg-green-500/20
-          blur-[160px]
-          "
-        />
-
-        <motion.div
-          animate={{
-            x: [0, -80, 0],
-            y: [0, 60, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-          }}
-          className="
-          absolute
-          bottom-0
-          right-0
-
-          w-[500px]
-          h-[500px]
-
-          bg-emerald-500/20
-          blur-[160px]
-          "
-        />
-
-      </div>
-
-      {/* ================================================= */}
       {/* HEADER */}
-      {/* ================================================= */}
-
       <div className="
       relative
       z-20
       mb-14
       ">
 
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 40,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-        >
+        <div className="
+        inline-flex
+        items-center
+        gap-3
 
-          <div className="
-          inline-flex
-          items-center
-          gap-3
+        px-6
+        py-3
 
-          px-6
-          py-3
+        rounded-full
 
-          rounded-full
+        bg-white/5
 
-          bg-white/5
-          backdrop-blur-2xl
+        border
+        border-white/10
 
-          border
-          border-white/10
+        mb-8
+        ">
 
-          mb-8
+          <Sparkles
+            size={18}
+            className="text-green-400"
+          />
+
+          <span className="
+          uppercase
+          tracking-[5px]
+          text-xs
+          font-bold
+          text-green-300
           ">
 
-            <Sparkles
-              size={18}
-              className="text-green-400"
-            />
+            Premium Cart
 
-            <span className="
-            uppercase
-            tracking-[5px]
-            text-xs
-            font-bold
-            text-green-300
-            ">
-              Premium Cart
-            </span>
+          </span>
 
-          </div>
+        </div>
 
-          <h1 className="
-          text-6xl
-          md:text-7xl
-          font-black
-          leading-[0.9]
-          mb-6
+        <h1 className="
+        text-6xl
+        md:text-7xl
+        font-black
+        leading-[0.9]
+        mb-6
+        ">
+
+          Your
+          <span className="
+          text-green-400
+          italic
           ">
+            {' '}Organic
+          </span>
+          {' '}Cart
 
-            Your <span className="text-green-400 italic">
-              Organic
-            </span> Cart
-
-          </h1>
-
-          <p className="
-          text-gray-400
-          text-xl
-          max-w-2xl
-          leading-relaxed
-          ">
-
-            Review your selected premium healthy products
-            with futuristic shopping experience.
-
-          </p>
-
-        </motion.div>
+        </h1>
 
       </div>
 
-      {/* ================================================= */}
       {/* FEATURES */}
-      {/* ================================================= */}
-
       <div className="
       relative
       z-20
@@ -377,7 +264,6 @@ const Cart = () => {
       grid
       md:grid-cols-3
       gap-6
-
       mb-12
       ">
 
@@ -396,13 +282,8 @@ const Cart = () => {
           },
         ].map((item, i) => (
 
-          <motion.div
+          <div
             key={i}
-            whileHover={{
-              y: -10,
-              rotateX: 8,
-              rotateY: -8,
-            }}
             className="
             bg-white/5
             backdrop-blur-3xl
@@ -413,8 +294,6 @@ const Cart = () => {
             rounded-[30px]
 
             p-6
-
-            shadow-[0_20px_80px_rgba(0,0,0,0.35)]
             "
           >
 
@@ -442,22 +321,18 @@ const Cart = () => {
             <h3 className="
             text-2xl
             font-black
-            text-white
             ">
 
               {item.title}
 
             </h3>
 
-          </motion.div>
+          </div>
         ))}
 
       </div>
 
-      {/* ================================================= */}
-      {/* MAIN CONTENT */}
-      {/* ================================================= */}
-
+      {/* MAIN */}
       <div className="
       relative
       z-20
@@ -467,22 +342,17 @@ const Cart = () => {
       gap-10
       ">
 
-        {/* CART ITEMS */}
+        {/* ITEMS */}
         <div className="space-y-7">
 
           {cartItems.map((item) => (
 
             <motion.div
-              key={item.id}
+              key={item._id}
               whileHover={{
-                y: -8,
-                rotateX: 5,
-                rotateY: -5,
+                y: -5,
               }}
               className="
-              group
-              relative
-
               bg-white/5
               backdrop-blur-3xl
 
@@ -490,10 +360,6 @@ const Cart = () => {
               border-white/10
 
               rounded-[35px]
-
-              overflow-hidden
-
-              shadow-[0_20px_80px_rgba(0,0,0,0.45)]
 
               p-5
 
@@ -506,37 +372,23 @@ const Cart = () => {
 
               {/* IMAGE */}
               <Link
-                to={`/product/${item.id}`}
+                to={`/product/${item._id}`}
                 className="
-                relative
                 w-full
                 xl:w-[240px]
                 "
               >
 
-                <div className="
-                overflow-hidden
-                rounded-[28px]
-                h-56
-                ">
-
-                  <motion.img
-                    whileHover={{
-                      scale: 1.08,
-                    }}
-                    transition={{
-                      duration: 0.6,
-                    }}
-                    src={item.image}
-                    alt={item.name}
-                    className="
-                    w-full
-                    h-full
-                    object-cover
-                    "
-                  />
-
-                </div>
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="
+                  w-full
+                  h-56
+                  object-cover
+                  rounded-[28px]
+                  "
+                />
 
               </Link>
 
@@ -550,7 +402,6 @@ const Cart = () => {
 
                 <div>
 
-                  {/* CATEGORY */}
                   <p className="
                   text-[11px]
                   uppercase
@@ -559,7 +410,6 @@ const Cart = () => {
                   text-green-300
 
                   font-black
-
                   mb-3
                   ">
 
@@ -567,67 +417,29 @@ const Cart = () => {
 
                   </p>
 
-                  {/* NAME */}
-                  <Link
-                    to={`/product/${item.id}`}
-                  >
-
-                    <h2 className="
-                    text-3xl
-                    font-black
-
-                    text-white
-
-                    hover:text-green-400
-
-                    transition-all
-                    duration-300
-                    ">
-
-                      {item.name}
-
-                    </h2>
-
-                  </Link>
-
-                  {/* PRICE */}
-                  <div className="
-                  flex
-                  items-end
-                  gap-3
-
-                  mt-5
+                  <h2 className="
+                  text-3xl
+                  font-black
                   ">
 
-                    <span className="
-                    text-4xl
-                    font-black
-                    text-green-400
-                    ">
+                    {item.name}
 
-                      ₹{item.price.toFixed(2)}
+                  </h2>
 
-                    </span>
+                  <div className="
+                  mt-5
+                  text-4xl
+                  font-black
+                  text-green-400
+                  ">
 
-                    {item.oldPrice && (
-
-                      <del className="
-                      text-gray-500
-                      text-lg
-                      font-bold
-                      mb-1
-                      ">
-
-                        ₹{item.oldPrice.toFixed(2)}
-
-                      </del>
-                    )}
+                    ₹{item.price.toFixed(2)}
 
                   </div>
 
                 </div>
 
-                {/* BOTTOM */}
+                {/* ACTIONS */}
                 <div className="
                 mt-8
 
@@ -655,14 +467,13 @@ const Cart = () => {
                   py-3
                   ">
 
-                    {/* MINUS */}
                     <button
                       onClick={() =>
                         updateQuantity(
-                          item.id,
+                          item._id,
                           Math.max(
                             1,
-                            item.quantity - 1
+                            item.qty - 1
                           )
                         )
                       }
@@ -674,10 +485,6 @@ const Cart = () => {
 
                       bg-white/5
 
-                      hover:bg-green-500
-
-                      transition-all
-
                       flex
                       items-center
                       justify-center
@@ -688,22 +495,20 @@ const Cart = () => {
 
                     </button>
 
-                    {/* VALUE */}
                     <span className="
                     text-2xl
                     font-black
                     ">
 
-                      {item.quantity}
+                      {item.qty}
 
                     </span>
 
-                    {/* PLUS */}
                     <button
                       onClick={() =>
                         updateQuantity(
-                          item.id,
-                          item.quantity + 1
+                          item._id,
+                          item.qty + 1
                         )
                       }
                       className="
@@ -712,11 +517,7 @@ const Cart = () => {
 
                       rounded-xl
 
-                      bg-white/5
-
-                      hover:bg-green-500
-
-                      transition-all
+                      bg-green-500
 
                       flex
                       items-center
@@ -731,15 +532,9 @@ const Cart = () => {
                   </div>
 
                   {/* REMOVE */}
-                  <motion.button
-                    whileHover={{
-                      scale: 1.05,
-                    }}
-                    whileTap={{
-                      scale: 0.95,
-                    }}
+                  <button
                     onClick={() =>
-                      removeFromCart(item.id)
+                      removeFromCart(item._id)
                     }
                     className="
                     flex
@@ -759,11 +554,6 @@ const Cart = () => {
                     text-red-400
 
                     font-black
-
-                    hover:bg-red-500
-                    hover:text-white
-
-                    transition-all
                     "
                   >
 
@@ -771,7 +561,7 @@ const Cart = () => {
 
                     Remove
 
-                  </motion.button>
+                  </button>
 
                 </div>
 
@@ -782,169 +572,129 @@ const Cart = () => {
 
         </div>
 
-        {/* ================================================= */}
-        {/* ORDER SUMMARY */}
-        {/* ================================================= */}
-
+        {/* SUMMARY */}
         <div className="
-        h-fit
         sticky
         top-28
+        h-fit
         ">
 
-          <motion.div
-            whileHover={{
-              y: -5,
-            }}
-            className="
-            relative
+          <div className="
+          bg-white/5
+          backdrop-blur-3xl
 
-            bg-white/5
-            backdrop-blur-3xl
+          border
+          border-white/10
 
-            border
-            border-white/10
+          rounded-[40px]
 
-            rounded-[40px]
+          p-8
+          ">
 
-            overflow-hidden
+            <h2 className="
+            text-4xl
+            font-black
+            mb-8
+            ">
 
-            p-8
+              Order Summary
 
-            shadow-[0_20px_100px_rgba(0,0,0,0.5)]
-            "
-          >
+            </h2>
 
-            {/* GLOW */}
             <div className="
-            absolute
-            top-0
-            right-0
+            space-y-5
+            mb-8
+            ">
 
-            w-60
-            h-60
+              {cartItems.map((item) => (
 
-            bg-green-500/20
-            blur-[120px]
-            " />
+                <div
+                  key={item._id}
+                  className="
+                  flex
+                  items-center
+                  justify-between
 
-            <div className="relative z-10">
+                  border-b
+                  border-white/10
 
-              <h2 className="
-              text-4xl
-              font-black
-              text-white
-              mb-8
-              ">
+                  pb-4
+                  "
+                >
 
-                Order Summary
+                  <div>
 
-              </h2>
-
-              {/* ITEMS */}
-              <div className="
-              space-y-5
-              mb-8
-              ">
-
-                {cartItems.map((item) => (
-
-                  <div
-                    key={item.id}
-                    className="
-                    flex
-                    items-center
-                    justify-between
-
-                    border-b
-                    border-white/10
-
-                    pb-4
-                    "
-                  >
-
-                    <div>
-
-                      <p className="
-                      font-black
-                      text-white
-                      ">
-
-                        {item.name}
-
-                      </p>
-
-                      <p className="
-                      text-sm
-                      text-gray-400
-                      mt-1
-                      ">
-
-                        Qty : {item.quantity}
-
-                      </p>
-
-                    </div>
-
-                    <span className="
-                    text-lg
+                    <p className="
                     font-black
-                    text-green-400
                     ">
 
-                      ₹
-                      {(
-                        item.price *
-                        item.quantity
-                      ).toFixed(2)}
+                      {item.name}
 
-                    </span>
+                    </p>
+
+                    <p className="
+                    text-sm
+                    text-gray-400
+                    ">
+
+                      Qty : {item.qty}
+
+                    </p>
 
                   </div>
-                ))}
 
-              </div>
+                  <span className="
+                  text-lg
+                  font-black
+                  text-green-400
+                  ">
 
-              {/* TOTAL */}
-              <div className="
-              flex
-              items-center
-              justify-between
+                    ₹
+                    {(
+                      item.price *
+                      item.qty
+                    ).toFixed(2)}
 
-              mb-10
+                  </span>
+
+                </div>
+              ))}
+
+            </div>
+
+            {/* TOTAL */}
+            <div className="
+            flex
+            items-center
+            justify-between
+            mb-10
+            ">
+
+              <h3 className="
+              text-3xl
+              font-black
               ">
 
-                <h3 className="
-                text-3xl
-                font-black
-                text-white
-                ">
+                Total
 
-                  Total
+              </h3>
 
-                </h3>
+              <span className="
+              text-5xl
+              font-black
+              text-green-400
+              ">
 
-                <span className="
-                text-5xl
-                font-black
-                text-green-400
-                ">
+                ₹{getCartTotal.toFixed(2)}
 
-                  ₹{getCartTotal().toFixed(2)}
+              </span>
 
-                </span>
+            </div>
 
-              </div>
+            {/* CHECKOUT */}
+            <Link to="/checkout">
 
-              {/* CHECKOUT */}
-              <motion.button
-                whileHover={{
-                  scale: 1.03,
-                  y: -3,
-                }}
-                whileTap={{
-                  scale: 0.95,
-                }}
+              <button
                 className="
                 w-full
 
@@ -958,50 +708,16 @@ const Cart = () => {
 
                 text-xl
                 font-black
-
-                text-white
-
-                shadow-[0_20px_60px_rgba(34,197,94,0.35)]
-
-                transition-all
-                duration-300
                 "
               >
 
                 Proceed To Checkout
 
-              </motion.button>
+              </button>
 
-              {/* SHOP */}
-              <Link
-                to="/shop"
-                className="
-                mt-5
+            </Link>
 
-                flex
-                items-center
-                justify-center
-                gap-3
-
-                text-gray-400
-
-                hover:text-green-400
-
-                transition-all
-
-                font-bold
-                "
-              >
-
-                <ArrowLeft size={18} />
-
-                Continue Shopping
-
-              </Link>
-
-            </div>
-
-          </motion.div>
+          </div>
 
         </div>
 
