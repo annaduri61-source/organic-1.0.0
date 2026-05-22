@@ -25,9 +25,17 @@ const ProductCard = ({ product }) => {
   const { likedItems, toggleWishlist } =
     useWishlist();
 
+  /* ======================================= */
+  /* WISHLIST CHECK */
+  /* ======================================= */
+
   const isLiked = likedItems.some(
-    (item) => item.id === product.id
+    (item) => item._id === product._id
   );
+
+  /* ======================================= */
+  /* STATES */
+  /* ======================================= */
 
   const [quantity, setQuantity] =
     useState(1);
@@ -35,9 +43,9 @@ const ProductCard = ({ product }) => {
   const [isHovered, setIsHovered] =
     useState(false);
 
-  /* ================================================= */
+  /* ======================================= */
   /* ADD TO CART */
-  /* ================================================= */
+  /* ======================================= */
 
   const handleAddToCart = (e) => {
 
@@ -48,9 +56,9 @@ const ProductCard = ({ product }) => {
     addToCart(product, quantity);
   };
 
-  /* ================================================= */
+  /* ======================================= */
   /* WISHLIST */
-  /* ================================================= */
+  /* ======================================= */
 
   const handleWishlist = (e) => {
 
@@ -119,10 +127,7 @@ const ProductCard = ({ product }) => {
       }}
     >
 
-      {/* ================================================= */}
       {/* GLOW */}
-      {/* ================================================= */}
-
       <div className="
       absolute
       inset-0
@@ -138,39 +143,14 @@ const ProductCard = ({ product }) => {
       pointer-events-none
       " />
 
-      {/* ================================================= */}
-      {/* SHINE */}
-      {/* ================================================= */}
-
-      <div className="
-      absolute
-      inset-0
-
-      before:absolute
-      before:inset-0
-
-      before:bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent)]
-
-      before:translate-x-[-200%]
-
-      group-hover:before:translate-x-[200%]
-
-      before:transition-transform
-      before:duration-[1800ms]
-      " />
-
-      {/* ================================================= */}
-      {/* IMAGE SECTION */}
-      {/* ================================================= */}
-
+      {/* IMAGE */}
       <div className="
       relative
       h-[290px]
       overflow-hidden
       ">
 
-        {/* IMAGE */}
-        <Link to={`/product/${product.id}`}>
+        <Link to={`/product/${product._id}`}>
 
           <motion.img
             animate={{
@@ -207,31 +187,15 @@ const ProductCard = ({ product }) => {
         to-transparent
         " />
 
-        {/* ================================================= */}
         {/* DISCOUNT */}
-        {/* ================================================= */}
-
         {product.discount && (
 
-          <motion.div
-            initial={{
-              scale: 0,
-              rotate: -20,
-            }}
-            animate={{
-              scale: 1,
-              rotate: 0,
-            }}
-            whileHover={{
-              scale: 1.08,
-            }}
-            className="
-            absolute
-            top-4
-            left-4
-            z-30
-            "
-          >
+          <div className="
+          absolute
+          top-4
+          left-4
+          z-30
+          ">
 
             <div className="
             px-4
@@ -249,21 +213,15 @@ const ProductCard = ({ product }) => {
             text-[10px]
 
             tracking-[0.2em]
-
-            shadow-[0_10px_30px_rgba(34,197,94,0.4)]
             ">
 
               {product.discount}% OFF
 
             </div>
-
-          </motion.div>
+          </div>
         )}
 
-        {/* ================================================= */}
-        {/* ACTION BUTTONS */}
-        {/* ================================================= */}
-
+        {/* ACTIONS */}
         <motion.div
           animate={{
             x: isHovered ? 0 : 20,
@@ -292,7 +250,6 @@ const ProductCard = ({ product }) => {
             }}
             whileHover={{
               scale: 1.1,
-              rotate: 10,
             }}
             onClick={handleWishlist}
             className={`
@@ -309,8 +266,6 @@ const ProductCard = ({ product }) => {
 
             border
             border-white/10
-
-            shadow-xl
 
             transition-all
 
@@ -335,7 +290,7 @@ const ProductCard = ({ product }) => {
 
           {/* VIEW */}
           <Link
-            to={`/product/${product.id}`}
+            to={`/product/${product._id}`}
           >
 
             <motion.button
@@ -344,7 +299,6 @@ const ProductCard = ({ product }) => {
               }}
               whileHover={{
                 scale: 1.1,
-                rotate: -10,
               }}
               className="
               w-11
@@ -357,7 +311,6 @@ const ProductCard = ({ product }) => {
               justify-center
 
               bg-black/40
-              backdrop-blur-3xl
 
               border
               border-white/10
@@ -365,8 +318,6 @@ const ProductCard = ({ product }) => {
               text-white
 
               hover:bg-green-500
-
-              shadow-xl
 
               transition-all
               "
@@ -377,13 +328,9 @@ const ProductCard = ({ product }) => {
             </motion.button>
 
           </Link>
-
         </motion.div>
 
-        {/* ================================================= */}
         {/* CATEGORY */}
-        {/* ================================================= */}
-
         <div className="
         absolute
         bottom-4
@@ -398,7 +345,6 @@ const ProductCard = ({ product }) => {
           rounded-full
 
           bg-black/40
-          backdrop-blur-xl
 
           border
           border-white/10
@@ -414,25 +360,17 @@ const ProductCard = ({ product }) => {
             {product.category}
 
           </div>
-
         </div>
-
       </div>
 
-      {/* ================================================= */}
       {/* CONTENT */}
-      {/* ================================================= */}
-
       <div className="
       relative
       p-5
       z-10
       ">
 
-        {/* ================================================= */}
         {/* RATING */}
-        {/* ================================================= */}
-
         <div className="
         flex
         items-center
@@ -462,7 +400,6 @@ const ProductCard = ({ product }) => {
               {product.rating || 4.8}
 
             </span>
-
           </div>
 
           <Sparkles
@@ -472,46 +409,36 @@ const ProductCard = ({ product }) => {
             opacity-70
             "
           />
-
         </div>
 
-        {/* ================================================= */}
-        {/* PRODUCT NAME */}
-        {/* ================================================= */}
+        {/* NAME */}
+        <Link
+          to={`/product/${product._id}`}
+        >
 
-        <Link to={`/product/${product.id}`}>
+          <h3 className="
+          text-[24px]
+          font-black
 
-          <motion.h3
-            whileHover={{
-              x: 3,
-            }}
-            className="
-            text-[24px]
-            font-black
+          tracking-[-1px]
 
-            tracking-[-1px]
+          text-white
 
-            text-white
+          leading-[1.1]
 
-            leading-[1.1]
+          transition-all
+          duration-300
 
-            transition-all
-            duration-300
-
-            group-hover:text-green-300
-            "
-          >
+          group-hover:text-green-300
+          ">
 
             {product.name}
 
-          </motion.h3>
+          </h3>
 
         </Link>
 
-        {/* ================================================= */}
         {/* DESCRIPTION */}
-        {/* ================================================= */}
-
         <p className="
         text-gray-400
 
@@ -524,13 +451,9 @@ const ProductCard = ({ product }) => {
         ">
 
           {product.description}
-
         </p>
 
-        {/* ================================================= */}
         {/* PRICE */}
-        {/* ================================================= */}
-
         <div className="
         flex
         items-end
@@ -553,7 +476,7 @@ const ProductCard = ({ product }) => {
           text-transparent
           ">
 
-            ₹{product.price.toFixed(2)}
+            ₹{product.price?.toFixed(2)}
 
           </span>
 
@@ -566,17 +489,13 @@ const ProductCard = ({ product }) => {
             mb-1
             ">
 
-              ₹{product.oldPrice.toFixed(2)}
+              ₹{product.oldPrice?.toFixed(2)}
 
             </del>
           )}
-
         </div>
 
-        {/* ================================================= */}
         {/* QUANTITY */}
-        {/* ================================================= */}
-
         <div className="
         mt-5
 
@@ -595,7 +514,6 @@ const ProductCard = ({ product }) => {
         py-3
         ">
 
-          {/* MINUS */}
           <motion.button
             whileTap={{
               scale: 0.85,
@@ -623,8 +541,6 @@ const ProductCard = ({ product }) => {
             flex
             items-center
             justify-center
-
-            transition-all
             "
           >
 
@@ -632,7 +548,6 @@ const ProductCard = ({ product }) => {
 
           </motion.button>
 
-          {/* VALUE */}
           <span className="
           text-xl
           font-black
@@ -643,7 +558,6 @@ const ProductCard = ({ product }) => {
 
           </span>
 
-          {/* PLUS */}
           <motion.button
             whileTap={{
               scale: 0.85,
@@ -669,21 +583,15 @@ const ProductCard = ({ product }) => {
             flex
             items-center
             justify-center
-
-            transition-all
             "
           >
 
             <Plus size={16} />
 
           </motion.button>
-
         </div>
 
-        {/* ================================================= */}
-        {/* BUTTON */}
-        {/* ================================================= */}
-
+        {/* ADD TO CART */}
         <motion.button
           whileTap={{
             scale: 0.95,
@@ -694,7 +602,6 @@ const ProductCard = ({ product }) => {
           }}
           onClick={handleAddToCart}
           className="
-          group
           relative
           overflow-hidden
 
@@ -724,31 +631,10 @@ const ProductCard = ({ product }) => {
 
           shadow-[0_20px_50px_rgba(34,197,94,0.4)]
 
-          hover:shadow-[0_25px_70px_rgba(34,197,94,0.6)]
-
           transition-all
           duration-500
           "
         >
-
-          {/* SHINE */}
-          <div className="
-          absolute
-          top-0
-          -left-24
-
-          w-20
-          h-full
-
-          bg-white/20
-
-          skew-x-12
-
-          group-hover:left-[120%]
-
-          transition-all
-          duration-1000
-          " />
 
           <ShoppingBag size={18} />
 
@@ -759,7 +645,6 @@ const ProductCard = ({ product }) => {
         </motion.button>
 
       </div>
-
     </motion.div>
   );
 };

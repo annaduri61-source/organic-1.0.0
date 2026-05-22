@@ -1,73 +1,189 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// Components
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from 'react-router-dom';
+
+/* ======================================= */
+/* COMPONENTS */
+/* ======================================= */
+
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 
-// Pages
+import ProtectedRoute from './components/ProtectedRoute';
+import AdminRoute from './components/AdminRoute';
+
+/* ======================================= */
+/* PAGES */
+/* ======================================= */
+
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
+
 import Shop from './pages/Shop';
 import Categories from './pages/Categories';
 import SingleProduct from './pages/SingleProduct';
+
 import Cart from './pages/Cart';
 import Wishlist from './pages/Wishlist';
+import Checkout from './pages/Checkout';
+
 import Login from './pages/Login';
 import Register from './pages/Register';
-import ScrollToTop from './components/ScrollToTop';
-// Context
+
+import AdminDashboard from './pages/AdminDashboard';
+
+/* ======================================= */
+/* CONTEXT */
+/* ======================================= */
+
 import { WishlistProvider } from './context/WishlistContext';
-import { CartProvider } from './context/CartContext';
 
 function App() {
+
   return (
-    <CartProvider>
-      
-      <WishlistProvider>
-        <Router>
- <ScrollToTop />
-          <div className="min-h-screen flex flex-col app-shell text-slate-950">
 
-            <Navbar />
+    <WishlistProvider>
 
-            <main className="flex-grow">
+      <Router>
 
-              <Routes>
+        {/* SCROLL TO TOP */}
+        <ScrollToTop />
 
-                <Route path="/" element={<Home />} />
+        <div className="
+        min-h-screen
+        flex
+        flex-col
+        app-shell
+        text-slate-950
+        ">
 
-                <Route path="/about" element={<About />} />
+          {/* ======================================= */}
+          {/* NAVBAR */}
+          {/* ======================================= */}
 
-                <Route path="/contact" element={<Contact />} />
+          <Navbar />
 
-                <Route path="/shop" element={<Shop />} />
+          {/* ======================================= */}
+          {/* MAIN CONTENT */}
+          {/* ======================================= */}
 
-                <Route path="/categories" element={<Categories />} />
+          <main className="flex-grow">
 
-                <Route path="/product/:id" element={<SingleProduct />} />
+            <Routes>
 
-                <Route path="/cart" element={<Cart />} />
+              {/* ======================================= */}
+              {/* PUBLIC ROUTES */}
+              {/* ======================================= */}
 
-                <Route path="/wishlist" element={<Wishlist />} />
+              <Route
+                path="/"
+                element={<Home />}
+              />
 
-                {/* AUTH */}
-                <Route path="/login" element={<Login />} />
+              <Route
+                path="/about"
+                element={<About />}
+              />
 
-                <Route path="/register" element={<Register />} />
+              <Route
+                path="/contact"
+                element={<Contact />}
+              />
 
-              </Routes>
+              <Route
+                path="/shop"
+                element={<Shop />}
+              />
 
-            </main>
+              <Route
+                path="/categories"
+                element={<Categories />}
+              />
 
-            <Footer />
+              <Route
+                path="/product/:id"
+                element={<SingleProduct />}
+              />
 
-          </div>
+              {/* ======================================= */}
+              {/* AUTH ROUTES */}
+              {/* ======================================= */}
 
-        </Router>
-      </WishlistProvider>
-    </CartProvider>
+              <Route
+                path="/login"
+                element={<Login />}
+              />
+
+              <Route
+                path="/register"
+                element={<Register />}
+              />
+
+              {/* ======================================= */}
+              {/* PROTECTED USER ROUTES */}
+              {/* ======================================= */}
+
+              <Route
+                path="/cart"
+                element={
+                  <ProtectedRoute>
+                    <Cart />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/wishlist"
+                element={
+                  <ProtectedRoute>
+                    <Wishlist />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/checkout"
+                element={
+                  <ProtectedRoute>
+                    <Checkout />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* ======================================= */}
+              {/* ADMIN ROUTES */}
+              {/* ======================================= */}
+
+              <Route
+                path="/admin"
+                element={
+                  <AdminRoute>
+                    <AdminDashboard />
+                  </AdminRoute>
+                }
+              />
+
+            </Routes>
+
+          </main>
+
+          {/* ======================================= */}
+          {/* FOOTER */}
+          {/* ======================================= */}
+
+          <Footer />
+
+        </div>
+
+      </Router>
+
+    </WishlistProvider>
   );
 }
 
